@@ -9,5 +9,7 @@ class Usuario(Base):
   login = Column(String(255), nullable=False, unique=True)
   senha = Column(String(120), nullable=False)
   nome = Column(String(255), nullable=False)
+
   id_permissao = Column(Integer, ForeignKey('permissao.id'), nullable=False)
   
+  # permissao = relationship("Permissão", backref="formulario")

@@ -7,6 +7,8 @@ class Formulario(Base):
   
   id = Column(Integer, primary_key=True)
   data = Column(DateTime,nullable=False)
+
+  # Chaves Estrangeiras
   id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
   id_veiculo = Column(Integer, ForeignKey('veiculos.placa'), nullable=False)
   id_tipo = Column(Integer, ForeignKey('tipo.id'), nullable=False)
