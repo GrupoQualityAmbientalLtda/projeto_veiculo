@@ -1,6 +1,12 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum
 from sqlalchemy.orm import relationship
 from src.database.db import Base
+import enum
+
+class TipoEnum(str, enum.Enum):
+  SAIDA = 'Saída'
+  ENTRADA = 'Entrada'
+
 
 class Formulario(Base):
   __tablename__='formularios'
@@ -10,7 +16,7 @@ class Formulario(Base):
 
   # Chaves Estrangeiras
   id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
-  id_veiculo = Column(Integer, ForeignKey('veiculos.placa'), nullable=False)
+  id_veiculo = Column(Integer, ForeignKey('veiculos.id'), nullable=False)
   id_tipo = Column(Integer, ForeignKey('tipo.id'), nullable=False)
   id_status = Column(Integer, ForeignKey('status_formulario.id'), nullable=False)
   

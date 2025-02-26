@@ -1,11 +1,12 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, datetime
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from src.database.db import Base
 
 class Veiculo(Base):
   __tablename__ = 'veiculos'
   
-  placa = Column(String(7),primary_key=True, unique=True)
+  id = Column(Integer, primary_key=True, unique= True)
+  placa = Column(String(7), nullable=False)
   modelo = Column(String(120), nullable=False)
   cor = Column(String(50), nullable=False)
   odometro = Column(Integer(), nullable=False)

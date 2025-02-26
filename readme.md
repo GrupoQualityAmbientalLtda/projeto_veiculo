@@ -1,6 +1,6 @@
 # Formulário para controle de veículos
 
-<img src="imagem.png" alt="Imagem a ser Utilizada">
+<img src="image.png" alt="Imagem a ser Utilizada">
 
 > Formulário criado para controle de entrada, saída de veículos e controle de revisões.
 
