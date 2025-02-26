@@ -1,6 +1,7 @@
 import streamlit as st
 
 with st.form('Login'):
+    st.image("imgs/logo.png")
     login = st.text_input('Login', placeholder="Digite seu login")
     senha = st.text_input('Senha', type="password", placeholder="Digite sua senha")
     
