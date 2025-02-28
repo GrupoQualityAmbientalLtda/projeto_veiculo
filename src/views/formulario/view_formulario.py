@@ -1,9 +1,9 @@
 import streamlit as st
 
 with st.form("Formulário de veículos"):
-    st.header("Controle de Veículos", divider=True)
-    st.image("imgs/logo.png")
     
+    st.image("imgs/logo.png")
+    st.header("Controle de Veículos", divider=True)
     data = st.date_input(label="Data",value='today',format="DD/MM/YYYY")
     
     placa = st.text_input(label="Placa do Veículo") # Possível Trocar por selectbox, encontrar forma de puxar informações do banco de dados e transformar em opções para seleção.
@@ -75,6 +75,8 @@ with st.form("Formulário de veículos"):
                 st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
 
     observacoes = st.text_area("Alguma observação?")
+
+    enviar_imagens = st.file_uploader("Insira imagens das avarias:", accept_multiple_files=True)
 
     # INSERIR RUBRICA
 
