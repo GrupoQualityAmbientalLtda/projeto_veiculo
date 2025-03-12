@@ -4,7 +4,7 @@ with st.form("Formulário de veículos"):
     
     st.image("imgs/logo.png")
     st.header("Controle de Veículos", divider=True)
-    data = st.date_input(label="Data",value='today',format="DD/MM/YYYY")
+    
     
     placa = st.text_input(label="Placa do Veículo") # Possível Trocar por selectbox, encontrar forma de puxar informações do banco de dados e transformar em opções para seleção.
     # https://discuss.streamlit.io/t/can-i-add-to-a-selectbox-an-other-option-where-the-user-can-add-his-own-answer/28525/6
@@ -13,6 +13,7 @@ with st.form("Formulário de veículos"):
 
     tipo = st.selectbox("Selecione o tipo:",("Entrada","Saída")) # Será Selectbox
     
+    data = st.date_input(label="Data",value='today',format="DD/MM/YYYY")
     horario = st.time_input("Horário:")
     
     data_revisao = st.date_input(label="Última Revisão:",format="DD/MM/YYYY")

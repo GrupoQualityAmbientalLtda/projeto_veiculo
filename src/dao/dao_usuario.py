@@ -11,4 +11,5 @@ class DaoUsuario:
     def obter_usuario(cls, session, id):
         usuario = session.query(Usuario).filter(Usuario.id == id).first()
         return usuario
+
     
