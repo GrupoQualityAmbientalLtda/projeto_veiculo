@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from src.database.db import Base
 
@@ -10,3 +10,6 @@ class Veiculo(Base):
   modelo = Column(String(120), nullable=False)
   cor = Column(String(50), nullable=False)
   odometro = Column(Integer(), nullable=False)
+  avariado = Column(Boolean, nullable=False)
+
+  
