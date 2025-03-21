@@ -1,14 +1,16 @@
 import streamlit as st
 
-with st.form("Formulário de veículos"):
+with st.form("Formulário de Revisão"):
     
     st.image("imgs/logo.png")
-    st.header("Controle de Veículos", divider=True)
+    st.header("Revisão de Veículos", divider=True)
     
     
     placa = st.text_input(label="Placa do Veículo") # Possível Trocar por selectbox, encontrar forma de puxar informações do banco de dados e transformar em opções para seleção.
     # https://discuss.streamlit.io/t/can-i-add-to-a-selectbox-an-other-option-where-the-user-can-add-his-own-answer/28525/6
     
+    #PLACA DO CARRO É ????
+
     quilometragem = st.number_input(label="Quilometragem Inicial",value=0,min_value=0)
 
     tipo = st.selectbox("Selecione o tipo:",("Entrada","Saída")) # Será Selectbox

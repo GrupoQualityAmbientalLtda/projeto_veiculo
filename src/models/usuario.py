@@ -1,6 +1,12 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from src.database.db import Base
+import enum
+
+class PermissaoEnum(str, enum.Enum):
+  MOTORISTA = 'motorista'
+  GESTOR = 'gestor' # Pensar possibilidades de permissões de acesso ao sistema
+
 
 class Usuario(Base):
   __tablename__ = 'usuarios'
@@ -9,7 +15,4 @@ class Usuario(Base):
   login = Column(String(255), nullable=False, unique=True)
   senha = Column(String(120), nullable=False)
   nome = Column(String(255), nullable=False)
-
-  id_permissao = Column(Integer, ForeignKey('permissao.id'), nullable=False)
-  
-  # permissao = relationship("Permissão", backref="formulario")
+  status = Column(Enum(PermissaoEnum), default=PermissaoEnum.GESTOR, nullable=False)
