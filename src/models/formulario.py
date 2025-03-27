@@ -24,8 +24,8 @@ class Formulario(Base):
   # Chaves Estrangeiras
   id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
   id_veiculo = Column(Integer, ForeignKey('veiculos.id'), nullable=False)
-  id_revisao = Column(Integer, ForeignKey('revisao.id', nullable = False))
-  #id_status = Column(Integer, ForeignKey('status_formulario.id'), nullable=False)
+  id_revisao = Column(Integer, ForeignKey('revisao.id'), nullable = False)
+
 
   
   
