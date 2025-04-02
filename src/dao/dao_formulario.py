@@ -2,14 +2,14 @@ from src.models.formulario import Formulario
 
 class DaoFormulario:
     @classmethod
-    #ADICIONAR DESTINOS e OBS e IMAGENS
-    def criar_formulario(cls, session, id_usuario, id_veiculo, tipo, data, id_revisao):
+    def criar_formulario(cls, session, id_usuario, id_veiculo, id_tipo, id_status, data, observacao):
         formulario = Formulario(
             id_usuario=id_usuario,
             id_veiculo=id_veiculo,
-            tipo=tipo,
+            id_tipo=id_tipo,
+            id_status=id_status,
             data=data,
-            id_revisao=id_revisao
+            observacao=observacao
         )
         session.add(formulario)
         session.commit()
