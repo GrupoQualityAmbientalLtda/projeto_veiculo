@@ -1,6 +1,11 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Enum
 from sqlalchemy.orm import relationship
 from src.database.db import Base
+import enum
+
+class Status(str, enum.Enum):
+  ATIVO = 'ativo'
+  INATIVO = 'inativo'
 
 class Veiculo(Base):
   __tablename__ = 'veiculos'
@@ -11,5 +16,6 @@ class Veiculo(Base):
   cor = Column(String(50), nullable=False)
   odometro = Column(Integer(), nullable=False)
   avariado = Column(Boolean, nullable=False)
+  status = Column(Enum(Status), default=Status.ATIVO, nullable=False)
 
   

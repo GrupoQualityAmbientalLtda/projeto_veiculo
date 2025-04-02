@@ -18,7 +18,7 @@ class Formulario(Base):
   id = Column(Integer, primary_key=True)
   data = Column(DateTime,nullable=False)
 
-  tipo = Column(Enum(TipoEnum), default=TipoEnum.ENTRADA, nullable=False)
+  tipo = Column(Enum(TipoEnum), default=TipoEnum.SAIDA, nullable=False)
   observacao = Column(String(255))
 
   # Chaves Estrangeiras

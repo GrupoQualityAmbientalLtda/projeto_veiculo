@@ -1,7 +1,6 @@
 from src.models.avaria import Avaria
 from src.models.destinos import Destino
 from src.models.formulario import Formulario
-from src.models.pergunta import Pergunta
 from src.models.permissao import Permissao
 from src.models.registros import Registro
 from src.models.revisao import Revisao
@@ -24,27 +23,12 @@ from datetime import datetime
 #create_tables()
 
 
-def teste_criacao():
-    session = create_session()
 
-    id_usuario = 1
-    id_veiculo = 3
-    tipo = TipoEnum.ENTRADA
-    id_revisao = 2
-    data = datetime.strptime("2025-03-27", "%Y-%m-%d").date()
 
-    formulario_criado = DaoFormulario.criar_formulario(
-        session=session,
-        id_usuario=id_usuario,
-        id_veiculo=id_veiculo,
-        tipo=tipo,
-        data=data,
-        id_revisao=id_revisao,
-    )
-    print(f"Forulário criado: {formulario_criado}")
+# session = create_session()
 
-    formulario_obtido = DaoFormulario.obter_formulario_por_id(session, formulario_criado.id)
-    print(f"FOrmulário Obtido: {formulario_obtido}")
+# obter_usuario = DaoUsuario.obter_usuario(session, 1)
 
-if __name__ == "__main__":
-    teste_criacao()
+# print(obter_usuario.login)
+
+# session.close()

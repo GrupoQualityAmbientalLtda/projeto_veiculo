@@ -5,6 +5,7 @@ class DaoUsuario:
     def criar_usuario(cls, session, login, senha, nome):
         usuario = Usuario(login = login, senha = senha, nome = nome)
         session.add(usuario)
+        session.commit()
         return usuario
     
     @classmethod

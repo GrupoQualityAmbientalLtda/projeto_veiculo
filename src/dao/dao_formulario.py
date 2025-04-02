@@ -2,12 +2,12 @@ from src.models.formulario import Formulario
 
 class DaoFormulario:
     @classmethod
-    def criar_formulario(cls, session, id_usuario, id_veiculo, id_tipo, id_status, data, observacao):
+    def criar_formulario(cls, session, id_usuario, id_veiculo, tipo, id_revisao, data, observacao):
         formulario = Formulario(
             id_usuario=id_usuario,
             id_veiculo=id_veiculo,
-            id_tipo=id_tipo,
-            id_status=id_status,
+            tipo=tipo,
+            id_revisao = id_revisao,
             data=data,
             observacao=observacao
         )
@@ -23,9 +23,10 @@ class DaoFormulario:
         return formulario
 
     @classmethod
-    def listar_formularios_por_veiculo(cls, session, id_veiculo):
+    def listar_formularios_por_veiculo(cls, session, id_usuario):
+        # Substiruir veiculo por usuário, pois ele retornará uma lista de formulário de um usuário
         """
         Lista todos os formulários associados a um veículo.
         """
-        formularios = session.query(Formulario).filter(Formulario.id_veiculo == id_veiculo).all()
+        formularios = session.query(Formulario).filter(Formulario.id_usuario == id_usuario).all()
         return formularios
