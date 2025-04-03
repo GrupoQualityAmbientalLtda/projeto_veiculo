@@ -3,6 +3,9 @@ from sqlalchemy.orm import relationship
 from src.database.db import Base
 
 class Avaria(Base):
+
+    # Transformar em ENUM talvez?
+    
     __tablename__ ="avarias"
 
     id = Column(Integer, primary_key=True)
