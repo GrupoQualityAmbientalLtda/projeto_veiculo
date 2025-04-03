@@ -23,10 +23,9 @@ class DaoFormulario:
         return formulario
 
     @classmethod
-    def listar_formularios_por_veiculo(cls, session, id_usuario):
-        # Substiruir veiculo por usuário, pois ele retornará uma lista de formulário de um usuário
+    def listar_formularios_por_usuario(cls, session, id_usuario):
         """
-        Lista todos os formulários associados a um veículo.
+        Lista todos os formulários associados a um usuário.
         """
         formularios = session.query(Formulario).filter(Formulario.id_usuario == id_usuario).all()
         return formularios

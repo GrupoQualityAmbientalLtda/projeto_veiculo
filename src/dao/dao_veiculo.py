@@ -13,4 +13,3 @@ class DaoVeiculo:
         veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
         return veiculo
     
-#talvez não haja a necessidade da criação do DaoVeiculo, pois só existe um veículo no sistema
