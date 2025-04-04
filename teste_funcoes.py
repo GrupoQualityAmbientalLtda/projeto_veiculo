@@ -25,10 +25,15 @@ from datetime import datetime
 
 
 
-# session = create_session()
+session = create_session()
 
 # obter_usuario = DaoUsuario.obter_usuario(session, 1)
 
 # print(obter_usuario.login)
 
-# session.close()
+obter_avaria = DaoAvaria.obter_avaria(session, 2)
+
+print(f"Avaria obtida: {obter_avaria}")
+
+session.close()
+
