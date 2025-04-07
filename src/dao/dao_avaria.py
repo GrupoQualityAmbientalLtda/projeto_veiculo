@@ -3,7 +3,7 @@ from src.models.avaria import Avaria
 
 class DaoAvaria:
     @classmethod
-    # ENCONTRAR MANEIRA DE FAZER ISSO DE FORMA MAIS SIMPLES E LIMPA
+    # CRIAR FK PARA ESTA TABELA // 
     def criar_avaria(
         cls,
         session,
