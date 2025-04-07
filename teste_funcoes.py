@@ -45,15 +45,15 @@ session = create_session()
 # destino = 'Seychelles'
 # id_formulario = 3
 
-# # criar_destino = DaoDestino.criar_destino(session, destino, id_formulario)
+# criar_destino = DaoDestino.criar_destino(session, destino, id_formulario)
 
-# # destinos = DaoDestino.obter_destinos_por_formulario(session, id_formulario)
-# # # Exibição formatada
-# # print(f'\nDestinos vinculados ao ID do formulário: {id_formulario}')
-# # for d in destinos:
-# #     print(f'- ID do Destino: {d.id} | Destino: {d.destino}')
+# destinos = DaoDestino.obter_destinos_por_formulario(session, id_formulario)
+# # Exibição formatada
+# print(f'\nDestinos vinculados ao ID do formulário: {id_formulario}')
+# for d in destinos:
+#     print(f'- ID do Destino: {d.id} | Destino: {d.destino}')
 
-# # FOR PARA FORMULARIOS COM MESMO ID
+# FOR PARA FORMULARIOS COM MESMO ID
 
 # deletar_destinos = DaoDestino.deletar_destinos(session, id)
 

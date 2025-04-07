@@ -19,7 +19,6 @@ class DaoDestino:
         return destinos_formulario
     @classmethod
     def deletar_destinos(cls,session,id):
-        session = create_session()
         delete_destinos = session.query(Destino).filter(Destino.id == id).first()
         session.delete(delete_destinos)
         session.commit()
