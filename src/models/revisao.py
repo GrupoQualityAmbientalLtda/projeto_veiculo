@@ -9,4 +9,3 @@ class Revisao(Base):
   data = Column(DateTime,nullable=False)
   notificacao = Column(String(120), nullable=False)
   id_veiculo = Column(String(7), ForeignKey('veiculos.id'), nullable=False)
-  id_status = Column(String(120), ForeignKey('status_revisao.id'), nullable=False)

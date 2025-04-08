@@ -1,4 +1,5 @@
 from sqlalchemy import Integer, Column, String, LargeBinary, ForeignKey
+from sqlalchemy.orm import relationship
 from src.database.db import Base
 
 class Registro(Base):

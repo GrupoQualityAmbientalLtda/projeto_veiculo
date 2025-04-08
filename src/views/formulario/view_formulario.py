@@ -1,4 +1,9 @@
 import streamlit as st
+from PIL import Image
+import io
+from src.controller.controller_registros import processar_e_salvar_imagem
+from src.models.registros import Registro
+from src.dao.dao_registro import salvar_registro
 
 with st.form("Formulário de veículos"):
     
@@ -83,3 +88,16 @@ with st.form("Formulário de veículos"):
     # INSERIR RUBRICA
 
     st.form_submit_button('Enviar Formulário')
+
+
+with st.form("Formulário de teste"):
+
+    uploaded_file = st.file_uploader("Envie uma imagem", type=["png", "jpg", "jpeg"])
+    if st.form_submit_button("Enviar"):
+        try:
+            processar_e_salvar_imagem(uploaded_file)
+            st.success("Imagem salva com sucesso!")
+        except ValueError as e:
+            st.warning(str(e))
+        except Exception as e:
+            st.error(f"Erro inesperado: {e}")

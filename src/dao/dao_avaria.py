@@ -7,6 +7,7 @@ class DaoAvaria:
     def criar_avaria(
         cls,
         session,
+        id_formulario,
         agua_para_brisa=False,
         adesivos=False,
         alto_falante_saida_de_som=False,
@@ -53,6 +54,7 @@ class DaoAvaria:
         Seus parâmetros são, as avarias citadas.
         """
         avaria = Avaria(
+            id_formulario = id_formulario,
             agua_para_brisa=agua_para_brisa,
             adesivos=adesivos,
             alto_falante_saida_de_som=alto_falante_saida_de_som,

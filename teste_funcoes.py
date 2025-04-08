@@ -3,7 +3,6 @@ from src.models.destinos import Destino
 from src.models.formulario import Formulario
 from src.models.registros import Registro
 from src.models.revisao import Revisao
-from src.models.status_revisao import StatusRevisao
 from src.models.usuario import Usuario
 from src.models.veiculo import Veiculo
 from src.models.destinos import Destino

@@ -14,4 +14,11 @@ class DaoRegistro:
         registros = session.query(Registro).filter(Registro.id_avaria == id_avaria).all()
         return registros
     
+        
     # Terminar inserção de Imagens
+
+def salvar_registro(imagem_binaria, id_avaria):
+    with create_session() as session:
+        registros = Registro(foto=imagem_binaria, id_avaria=id_avaria)
+        session.add(registros)
+        session.commit()
