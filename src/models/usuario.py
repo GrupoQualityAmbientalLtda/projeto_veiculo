@@ -19,5 +19,6 @@ class Usuario(Base):
   login = Column(String(255), nullable=False, unique=True)
   senha = Column(String(120), nullable=False)
   nome = Column(String(255), nullable=False)
-  status = Column(Enum(Status), default=Status.ATIVO, nullable=False)
   permissao = Column(Enum(PermissaoEnum), default=PermissaoEnum.GESTOR, nullable=False)
+  status = Column(Enum(Status), default=Status.ATIVO, nullable=False)
+  
