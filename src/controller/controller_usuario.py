@@ -69,3 +69,8 @@ class ControllerUsuario:
                 print(f'Erro gerado {e}')
                 session.rollback()
                 return None
+            
+    @classmethod
+    def carregar_dataframe_usuarios(cls):
+        usuarios = cls.listar_usuarios()
+        dataframe = pd.DataFrame(usuarios, columns=['ID','Nome','Login','Permissão','Status'])
