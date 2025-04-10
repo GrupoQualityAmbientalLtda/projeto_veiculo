@@ -87,8 +87,11 @@ with st.form("Formulário de veículos"):
 
     # INSERIR RUBRICA
 
-    st.form_submit_button('Enviar Formulário')
-
+    if st.form_submit_button('Enviar Formulário'):
+        if not placa.strip():
+            st.warning('Por favor, preencha todos os campos.')
+        else:
+            st.sucess('Formulário enviado com sucesso')
 
 with st.form("Formulário de teste"):
 

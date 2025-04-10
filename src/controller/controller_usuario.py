@@ -12,12 +12,16 @@ class ControllerUsuario:
             return "Login não pode estar vazio!"
         if not senha:
             return "Senha não pode estar vazia!"
+        if not permissao:
+            return "Senha não pode estar vazia!"
+        if not status:
+            return "Senha não pode estar vazia!"
         return True
     
     @classmethod
     def cadastrar_usuario (cls, nome, login, senha, permissao, status):
         # Validação dos campos
-        campos_validados = cls.validar_campos_usuario(nome, login, senha)
+        campos_validados = cls.validar_campos_usuario(nome, login, senha, permissao, status)
         if campos_validados != True:
             return campos_validados
         
@@ -53,10 +57,14 @@ class ControllerUsuario:
     @classmethod
     def listar_usuarios(cls):
         with create_session() as session:
-            usuarios = cls.obter_usuarios
+            usuarios = cls.obter_usuarios()
             lista_usuarios = []
             for usuario in usuarios:
-                lista_usuarios.append((usuario.id, usuario.nome, usuario.login, usuario.permissao, usuario.status))
+                lista_usuarios.append((usuario.id, 
+                                       usuario.nome, 
+                                       usuario.login, 
+                                       usuario.permissao.value if hasattr(usuario.permissao, "value") else str(usuario.permissao),
+                                       usuario.status.value if hasattr(usuario.status, "value") else str(usuario.status)))
             return lista_usuarios
     @classmethod
     def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_permissao, novo_status):
@@ -73,4 +81,15 @@ class ControllerUsuario:
     @classmethod
     def carregar_dataframe_usuarios(cls):
         usuarios = cls.listar_usuarios()
-        dataframe = pd.DataFrame(usuarios, columns=['ID','Nome','Login','Permissão','Status'])
+        dataframe = pd.DataFrame(usuarios, columns=['ID','Nome','Login','Permissao','Status'])
+        return dataframe
+    @classmethod
+    def transformar_linha_dicionario(cls, linha):
+        dados_usuario = {
+                'id': linha.loc[linha.index[0], 'Id'],
+                'nome': linha.loc[linha.index[0], 'Nome'],
+                'login': linha.loc[linha.index[0], 'login'],
+                'permissao': linha.loc[linha.index[0], 'permissao'],
+                'status': linha.loc[linha.index[0], 'Status'].value
+            }
+        return dados_usuario
