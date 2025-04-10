@@ -22,14 +22,14 @@ class ControllerFormulario:
         return True
     
     @classmethod
-    def criar_formulario(cls, id_veiculo,tipo,id_revisao,data,destino,horario,km_inicial):
-        formulario_validado = cls.validar_campos_formulario(id_veiculo,tipo,id_revisao,data,destino,horario,km_inicial)
+    def criar_formulario(cls, id_veiculo,km_inicial,tipo,id_revisao,data,destino,horario):
+        formulario_validado = cls.validar_campos_formulario(id_veiculo,km_inicial, tipo,id_revisao,data,destino,horario,)
         if formulario_validado != True:
             return formulario_validado
 
         with create_session() as session:
             try:
-                criar_formulario = DaoFormulario.criar_formulario(session,id_veiculo,tipo,id_revisao,data,destino,horario,km_inicial)
+                criar_formulario = DaoFormulario.criar_formulario(session,id_veiculo,km_inicial,tipo,id_revisao,data,destino,horario,)
                 session.commit()
                 return True
             except Exception as e:

@@ -20,14 +20,25 @@ from datetime import datetime
 #drop_tables()
 #create_tables()
 
-session = create_session()
+# Criação de veículo
+# session = create_session()
+# id = 1
+# placa = 'KYN-4732'
+# modelo = 'Strada'
+# cor = 'Branca'
+# odometro = '5000'
+# avariado = True
+
+# criar_veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado)
+
+
 
 # obter_usuario = DaoUsuario.obter_usuario(session, 1)
 
 # print(obter_usuario.login)
 
-# 
 
+# CRIAÇÃO DE DESTINO
 
 # id = 2
 # destino = 'Somália'

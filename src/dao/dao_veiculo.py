@@ -2,8 +2,8 @@ from src.models.veiculo import Veiculo
 
 class DaoVeiculo:
     @classmethod
-    def criar_veiculo(cls, session, placa, modelo, cor):
-        veiculo = Veiculo(placa= placa, modelo = modelo, cor = cor)
+    def criar_veiculo(cls, session, placa, modelo, cor, odometro, avariado):
+        veiculo = Veiculo(placa = placa, modelo = modelo, cor = cor, odometro = odometro, avariado = avariado)
         session.add(veiculo)
         session.commit()
         return veiculo
