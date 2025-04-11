@@ -27,7 +27,7 @@ if st.button("Editar Usuário"):
 def criar_usuario():
     nome = st.text_input('Nome')
     login = st.text_input('Login')
-    senha = st.text_input('Senha')
+    senha = st.text_input('Senha', type='password')
     
     status = st.selectbox('Status', list(Status), format_func=lambda x: x.value)
     permissao = st.selectbox('Permissao', list(PermissaoEnum), format_func=lambda x: x.value)

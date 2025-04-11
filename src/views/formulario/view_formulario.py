@@ -55,14 +55,12 @@ nomes_avarias = {
     'Velocímetro/Tacógrafo': 'velocimetro_tacografo'
 }
 
-
 with st.form("Formulário de veículos"):
     id_veiculo = 1
     id_revisao = 1
     id_usuario = 1
     st.image("imgs/logo.png")
     st.header("Controle de Veículos", divider=True)
-    
     
     placas = ControllerVeiculo.listar_placas()
     placa_selecionada = st.selectbox("Placa do Veículo", placas)
@@ -81,7 +79,6 @@ with st.form("Formulário de veículos"):
     
     opcoes = list(nomes_avarias.keys())
 
-
     # Dividir as opções em grupos de 3
     for i in range(0, len(opcoes), 3):
         col1, col2, col3 = st.columns(3)  # Cria 3 colunas
@@ -94,17 +91,6 @@ with st.form("Formulário de veículos"):
         with col3:
             if i + 2 < len(opcoes):
                 st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
-
-    
-
-        # if isinstance(resultado, str):  # Se retornou mensagem de erro
-        #     st.error(f"Erro ao enviar: {resultado}")
-        #     print(f"Resultado retornado: {resultado} ({type(resultado)})")
-
-        # elif resultado:
-        #     st.success("Formulário e destino salvos com sucesso.")
-        # else:
-        #     st.error("Erro inesperado ao salvar o formulário.")
 
     if st.form_submit_button("Enviar"):
     # IDS TEMPORARIOS
