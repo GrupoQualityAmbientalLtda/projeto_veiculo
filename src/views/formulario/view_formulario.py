@@ -9,11 +9,57 @@ from src.dao.dao_destinos import DaoDestino
 from src.dao.dao_formulario import DaoFormulario
 from src.controller.controller_formulario import ControllerFormulario
 from src.controller.controller_veiculo import ControllerVeiculo
+from src.controller.controller_avaria import ControllerAvaria
 
 from datetime import datetime
 
+nomes_avarias = {
+    'Água Para-Brisa': 'agua_para_brisa',
+    'Adesivos': 'adesivos',
+    'Alto Falante (Saída de Som)': 'alto_falante_saida_de_som',
+    'Arranhados': 'arranhados',
+    'Bancos (Encostos/Assentos)': 'bancos_encostos_assentos',
+    'Buzina': 'buzina',
+    'Chave de Roda': 'chave_de_roda',
+    'Cintos de Segurança': 'cintos_de_seguranca',
+    'Documentos de Carro': 'documentos_de_carro',
+    'Farol Alto': 'farol_alto',
+    'Farol Baixo': 'farol_baixo',
+    'Fechamento das Janelas': 'fechamento_das_janelas',
+    'Lanternas Frente e Traseira': 'lanternas_frente_e_traseira',
+    'Lataria (Amassados)': 'lataria_amassados',
+    'Limpador Para-Brisa': 'limpador_para_brisa',
+    'Limpador Para-Brisa Traseiro': 'limpador_para_brisa_traseiro',
+    'Luz da Placa (Licença)': 'luz_da_placa_licenca',
+    'Luz de Freio': 'luz_de_freio',
+    'Luz de Ré': 'luz_de_re',
+    'Luz Interna': 'luz_interna',
+    'Luzes Painel': 'luzes_painel',
+    'Macaco': 'macaco',
+    'Nível da Água Radiador': 'nivel_da_agua_radiador',
+    'Óleo do Freio': 'oleo_do_freio',
+    'Óleo do Motor': 'oleo_do_motor',
+    'Para Brisa': 'para_brisa',
+    'Para-Choque Dianteiro': 'para_choque_dianteiro',
+    'Para-Choque Traseiro': 'para_choque_traseiro',
+    'Pisca Alerta': 'pisca_alerta',
+    'Pneu (Estado/Assentos)': 'pneu_estado_assentos',
+    'Pneu Reserva (Estepe)': 'pneu_reserva_estepe',
+    'Portas/Travas': 'portas_travas',
+    'Quebra Sol': 'quebra_sol',
+    'Retrovisores Externos': 'retrovisores_externos',
+    'Retrovisores Internos': 'retrovisores_internos',
+    'Seta Direita e Esquerda': 'seta_direita_e_esquerda',
+    'Tapete': 'tapete',
+    'Triângulo de Sinalização': 'triangulo_de_sinalizacao',
+    'Velocímetro/Tacógrafo': 'velocimetro_tacografo'
+}
+
+
 with st.form("Formulário de veículos"):
-    
+    id_veiculo = 1
+    id_revisao = 1
+    id_usuario = 1
     st.image("imgs/logo.png")
     st.header("Controle de Veículos", divider=True)
     
@@ -32,77 +78,10 @@ with st.form("Formulário de veículos"):
     observacoes = st.text_area("Alguma observação?")
 
     destino = st.text_input("Selecione o destino:")
-    if st.form_submit_button("Enviar"):
-        # IDS TEMPORARIOS
-        id_veiculo = 1
-        id_revisao = 1
-        id_usuario = 1
-
-        # JUNTAR DATA DE ENVIO + HORARIO E SALVAR NO BANCO
-        data_envio = datetime.combine(data, horario)
-
-        resultado = ControllerFormulario.criar_formulario(
-            id_usuario = id_usuario,
-            id_veiculo=id_veiculo,
-            quilometragem=quilometragem,
-            tipo=tipo,
-            id_revisao=id_revisao,
-            data=data_envio,
-            destino=destino,
-            observacao=observacoes
-        )
-
-        if isinstance(resultado, str):  # Se retornou mensagem de erro
-            st.error(f"Erro ao enviar: {resultado}")
-            print(f"Resultado retornado: {resultado} ({type(resultado)})")
-
-        elif resultado:
-            st.success("Formulário e destino salvos com sucesso.")
-        else:
-            st.error("Erro inesperado ao salvar o formulário.")
-
-    opcoes = [
-    'Água Para-Brisa',
-    'Adesivos',
-    'Alto Falante (Saída de Som)',
-    'Arranhados',
-    'Bancos (Encostos/Assentos)',
-    'Buzina',
-    'Chave de Roda',
-    'Cintos de Segurança',
-    'Documentos de Carro',
-    'Farol Alto',
-    'Farol Baixo',
-    'Fechamento das Janelas',
-    'Lanternas Frente e Traseira',
-    'Lataria (Amassados)',
-    'Limpador Para-Brisa',
-    'Limpador Para-Brisa Traseiro',
-    'Luz da Placa (Licença)',
-    'Luz de Freio',
-    'Luz de Ré',
-    'Luz Interna',
-    'Luzes Painel',
-    'Macaco',
-    'Nível da Água Radiador',
-    'Óleo do Freio',
-    'Óleo do Motor',
-    'Para Brisa',
-    'Para-Choque Dianteiro',
-    'Para-Choque Traseiro',
-    'Pisca Alerta',
-    'Pneu (Estado/Assentos)',
-    'Pneu Reserva (Estepe)',
-    'Portas/Travas',
-    'Quebra Sol',
-    'Retrovisores Externos',
-    'Retrovisores Internos',
-    'Seta Direita e Esquerda',
-    'Tapete',
-    'Triângulo de Sinalização',
-    'Velocímetro/Tacógrafo'
-]
     
+    opcoes = list(nomes_avarias.keys())
+
+
     # Dividir as opções em grupos de 3
     for i in range(0, len(opcoes), 3):
         col1, col2, col3 = st.columns(3)  # Cria 3 colunas
@@ -117,6 +96,49 @@ with st.form("Formulário de veículos"):
                 st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
 
     
+
+        # if isinstance(resultado, str):  # Se retornou mensagem de erro
+        #     st.error(f"Erro ao enviar: {resultado}")
+        #     print(f"Resultado retornado: {resultado} ({type(resultado)})")
+
+        # elif resultado:
+        #     st.success("Formulário e destino salvos com sucesso.")
+        # else:
+        #     st.error("Erro inesperado ao salvar o formulário.")
+
+    if st.form_submit_button("Enviar"):
+    # IDS TEMPORARIOS
+        id_veiculo = 1
+        id_revisao = 1
+        id_usuario = 1
+
+        data_envio = datetime.combine(data, horario)
+
+        id_formulario = ControllerFormulario.criar_formulario(
+            id_usuario=id_usuario,
+            id_veiculo=id_veiculo,
+            quilometragem=quilometragem,
+            tipo=tipo,
+            id_revisao=id_revisao,
+            data=data_envio,
+            destino=destino,
+            observacao=observacoes
+        )
+
+        if isinstance(id_formulario, str):
+            st.error(f"Erro ao enviar: {id_formulario}")
+        elif id_formulario:
+            # Obter valores das checkboxes
+            avarias_data = {}
+            for i, nome_visual in enumerate(opcoes):
+                nome_model = nomes_avarias[nome_visual]
+                avarias_data[nome_model] = st.session_state.get(f'checkbox_{i}', False)
+
+            ControllerAvaria.criar_avaria(id_formulario=id_formulario, **avarias_data)
+            st.success("Formulário e checklist de avarias enviados com sucesso.")
+        else:
+            st.error("Erro inesperado ao salvar o formulário.")
+
 
 #     enviar_imagens = st.file_uploader("Insira imagens das avarias:", accept_multiple_files=True)
 

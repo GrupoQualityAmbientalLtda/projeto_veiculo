@@ -47,7 +47,7 @@ class ControllerFormulario:
                 )
 
                 session.commit()
-                return formulario
+                return formulario.id
             except Exception as e:
                 session.rollback()
                 print(f'Erro ao criar formulário: {e}')
