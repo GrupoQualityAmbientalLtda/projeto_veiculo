@@ -18,18 +18,19 @@ from src.dao.dao_destinos import DaoDestino
 from datetime import datetime
 
 #drop_tables()
-create_tables()
+#create_tables()
 
 # Criação de veículo
-# session = create_session()
-# id = 1
-# placa = 'KYN-4732'
+session = create_session()
+# placa = 'BUI8713'
 # modelo = 'Strada'
 # cor = 'Branca'
 # odometro = '5000'
-# avariado = True
+# avariado = False
 
 # criar_veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado)
+# id = 2
+# deletar_veiculo = DaoVeiculo.deletar_veiculo(session, id)
 
 
 

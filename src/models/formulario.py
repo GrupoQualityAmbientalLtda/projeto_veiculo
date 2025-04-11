@@ -24,7 +24,7 @@ class Formulario(Base):
   tipo = Column(Enum(TipoEnum), default=TipoEnum.SAIDA, nullable=False)
   observacao = Column(String(255))
   quilometragem = Column(Integer, nullable=False)
-  horario = Column(Time, nullable=False)
+
 
   # Chaves Estrangeiras
   id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)

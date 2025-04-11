@@ -16,4 +16,15 @@ class DaoVeiculo:
     def obter_veiculo_por_placa(cls, session, placa):
         veiculo = session.query(Veiculo).filter(Veiculo.placa == placa).first()
         return veiculo
-    
+    @classmethod
+    def listar_todos_veiculos(cls, session):
+        return session.query(Veiculo).all()
+    @classmethod
+    def deletar_veiculo(cls, session, id):
+        veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
+        if veiculo:
+            session.delete(veiculo)
+            session.commit()
+            return True
+        return False
+            

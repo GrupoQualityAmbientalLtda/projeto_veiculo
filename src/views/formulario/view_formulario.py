@@ -8,6 +8,7 @@ from src.database.db import create_session
 from src.dao.dao_destinos import DaoDestino
 from src.dao.dao_formulario import DaoFormulario
 from src.controller.controller_formulario import ControllerFormulario
+from src.controller.controller_veiculo import ControllerVeiculo
 
 from datetime import datetime
 
@@ -17,7 +18,8 @@ with st.form("Formulário de veículos"):
     st.header("Controle de Veículos", divider=True)
     
     
-    placa = st.text_input(label="Placa do Veículo") 
+    placas = ControllerVeiculo.listar_placas()
+    placa_selecionada = st.selectbox("Placa do Veículo", placas)
     
     quilometragem = st.number_input(label="Quilometragem Inicial",value=0,min_value=0)
 
@@ -31,12 +33,12 @@ with st.form("Formulário de veículos"):
 
     destino = st.text_input("Selecione o destino:")
     if st.form_submit_button("Enviar"):
-        # ⚙️ Simulando ID de veículo e revisão (ideal: recuperar do banco)
+        # IDS TEMPORARIOS
         id_veiculo = 1
         id_revisao = 1
         id_usuario = 1
 
-        # Combinar data e horário para salvar como datetime completo, se necessário
+        # JUNTAR DATA DE ENVIO + HORARIO E SALVAR NO BANCO
         data_envio = datetime.combine(data, horario)
 
         resultado = ControllerFormulario.criar_formulario(
@@ -47,7 +49,6 @@ with st.form("Formulário de veículos"):
             id_revisao=id_revisao,
             data=data_envio,
             destino=destino,
-            horario=horario,
             observacao=observacoes
         )
 
