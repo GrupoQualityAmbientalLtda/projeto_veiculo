@@ -61,59 +61,60 @@ with st.form("Formulário de veículos"):
         else:
             st.error("Erro inesperado ao salvar o formulário.")
 
-#     opcoes = [
-#     'Água Para-Brisa',
-#     'Adesivos',
-#     'Alto Falante (Saída de Som)',
-#     'Arranhados',
-#     'Bancos (Encostos/Assentos)',
-#     'Buzina',
-#     'Chave de Roda',
-#     'Cintos de Segurança',
-#     'Documentos de Carro',
-#     'Farol Alto',
-#     'Farol Baixo',
-#     'Fechamento das Janelas',
-#     'Lanternas Frente e Traseira',
-#     'Lataria (Amassados)',
-#     'Limpador Para-Brisa',
-#     'Limpador Para-Brisa Traseiro',
-#     'Luz da Placa (Licença)',
-#     'Luz de Freio',
-#     'Luz de Ré',
-#     'Luz Interna',
-#     'Luzes Painel',
-#     'Macaco',
-#     'Nível da Água Radiador',
-#     'Óleo do Freio',
-#     'Óleo do Motor',
-#     'Para Brisa',
-#     'Para-Choque Dianteiro',
-#     'Para-Choque Traseiro',
-#     'Pisca Alerta',
-#     'Pneu (Estado/Assentos)',
-#     'Pneu Reserva (Estepe)',
-#     'Portas/Travas',
-#     'Quebra Sol',
-#     'Retrovisores Externos',
-#     'Retrovisores Internos',
-#     'Seta Direita e Esquerda',
-#     'Tapete',
-#     'Triângulo de Sinalização',
-#     'Velocímetro/Tacógrafo'
-# ]
-#     # Dividir as opções em grupos de 3
-#     for i in range(0, len(opcoes), 3):
-#         col1, col2, col3 = st.columns(3)  # Cria 3 colunas
-#         with col1:
-#             if i < len(opcoes):
-#                 st.checkbox(opcoes[i], key=f'checkbox_{i}')
-#         with col2:
-#             if i + 1 < len(opcoes):
-#                 st.checkbox(opcoes[i + 1], key=f'checkbox_{i + 1}')
-#         with col3:
-#             if i + 2 < len(opcoes):
-#                 st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
+    opcoes = [
+    'Água Para-Brisa',
+    'Adesivos',
+    'Alto Falante (Saída de Som)',
+    'Arranhados',
+    'Bancos (Encostos/Assentos)',
+    'Buzina',
+    'Chave de Roda',
+    'Cintos de Segurança',
+    'Documentos de Carro',
+    'Farol Alto',
+    'Farol Baixo',
+    'Fechamento das Janelas',
+    'Lanternas Frente e Traseira',
+    'Lataria (Amassados)',
+    'Limpador Para-Brisa',
+    'Limpador Para-Brisa Traseiro',
+    'Luz da Placa (Licença)',
+    'Luz de Freio',
+    'Luz de Ré',
+    'Luz Interna',
+    'Luzes Painel',
+    'Macaco',
+    'Nível da Água Radiador',
+    'Óleo do Freio',
+    'Óleo do Motor',
+    'Para Brisa',
+    'Para-Choque Dianteiro',
+    'Para-Choque Traseiro',
+    'Pisca Alerta',
+    'Pneu (Estado/Assentos)',
+    'Pneu Reserva (Estepe)',
+    'Portas/Travas',
+    'Quebra Sol',
+    'Retrovisores Externos',
+    'Retrovisores Internos',
+    'Seta Direita e Esquerda',
+    'Tapete',
+    'Triângulo de Sinalização',
+    'Velocímetro/Tacógrafo'
+]
+    
+    # Dividir as opções em grupos de 3
+    for i in range(0, len(opcoes), 3):
+        col1, col2, col3 = st.columns(3)  # Cria 3 colunas
+        with col1:
+            if i < len(opcoes):
+                st.checkbox(opcoes[i], key=f'checkbox_{i}')
+        with col2:
+            if i + 1 < len(opcoes):
+                st.checkbox(opcoes[i + 1], key=f'checkbox_{i + 1}')
+        with col3:
+            if i + 2 < len(opcoes):
+                st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
 
     
 
