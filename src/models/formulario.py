@@ -2,9 +2,9 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum, Time
 from sqlalchemy.orm import relationship
 from src.database.db import Base
 import enum
-from src.models.usuario import Usuario
-from src.models.veiculo import Veiculo
-from src.models.revisao import Revisao
+# from src.models.usuario import Usuario
+# from src.models.veiculo import Veiculo
+# from src.models.revisao import Revisao
 
 #class StatusEnum(str, enum.Enum): # SABER SE HÁ A NECESSIDADE DE MARCAR COMO CUMPRIDO OU NAO (A CAMINHO, EM PROCESSAMENTO)
   #CAMINHO = 'A Caminho'

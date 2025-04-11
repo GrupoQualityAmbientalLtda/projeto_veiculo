@@ -81,8 +81,10 @@ class ControllerUsuario:
     @classmethod
     def carregar_dataframe_usuarios(cls):
         usuarios = cls.listar_usuarios()
-        dataframe = pd.DataFrame(usuarios, columns=['ID','Nome','Login','Permissao','Status'])
+        # , columns=['ID','Nome','Login','Permissao','Status']
+        dataframe = pd.DataFrame(usuarios)
         return dataframe
+    
     @classmethod
     def transformar_linha_dicionario(cls, linha):
         dados_usuario = {

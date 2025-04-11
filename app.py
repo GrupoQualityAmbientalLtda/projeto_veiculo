@@ -1,4 +1,8 @@
 import streamlit as st
+from src.models.formulario import Formulario
+from src.models.veiculo import Veiculo
+from src.models.revisao import Revisao
+from src.models.destinos import Destino
 
 # telas
 tela_login = st.Page(r'src\views\login\view_login.py', title='Tela de Login')

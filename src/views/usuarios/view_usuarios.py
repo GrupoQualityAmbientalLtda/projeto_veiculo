@@ -4,6 +4,7 @@ import pandas as pd
 # Status e Permissao
 from src.models.usuario import Status, PermissaoEnum
 
+
 st.title("Consulta de Usuários")
 st.subheader("Pesquisa:")
 
@@ -28,17 +29,21 @@ def criar_usuario():
     nome = st.text_input('Nome')
     login = st.text_input('Login')
     senha = st.text_input('Senha', type='password')
-    
-    status = st.selectbox('Status', list(Status), format_func=lambda x: x.value)
-    permissao = st.selectbox('Permissao', list(PermissaoEnum), format_func=lambda x: x.value)
+    lista_status = [status.value for status in Status]
+    status = st.selectbox('Status', lista_status)
+    lista_permissao = [permissao.value for permissao in PermissaoEnum]
+    permissao = st.selectbox('Permissao', lista_permissao)
     botao_cadastrar = st.button('Cadastrar Cliente', key='botao_cadastrar_usuario')
     if botao_cadastrar:
         usuario_salvo = ControllerUsuario.cadastrar_usuario(nome = nome , 
                                                             login = login, 
                                                             senha = senha, 
-                                                            permissao = permissao.name, 
-                                                            status = status.name)
-        st.success('Usuário Cadastrado com Sucesso!')
+                                                            permissao = permissao, 
+                                                            status = status)
+        if usuario_salvo:
+            st.success('Usuário Cadastrado com Sucesso!')
+        else:
+            st.error('Erro ao cadastrar o usuário!')
 if st.button("Novo Usuário"):
     criar_usuario()
         

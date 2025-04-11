@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum, Boolean
 from sqlalchemy.orm import relationship
 from src.database.db import Base
+# from src.models.formulario import Formulario
 import enum
 
 
