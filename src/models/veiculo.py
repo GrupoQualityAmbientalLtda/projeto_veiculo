@@ -17,5 +17,7 @@ class Veiculo(Base):
   odometro = Column(Integer(), nullable=False)
   avariado = Column(Boolean, nullable=False)
   status = Column(Enum(Status), default=Status.ATIVO, nullable=False)
+  formularios = relationship("Formulario", back_populates="veiculo")
+ 
 
   

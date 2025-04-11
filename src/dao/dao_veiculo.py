@@ -12,4 +12,8 @@ class DaoVeiculo:
     def obter_veiculo(cls, session, id):
         veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
         return veiculo
+    @classmethod
+    def obter_veiculo_por_placa(cls, session, placa):
+        veiculo = session.query(Veiculo).filter(Veiculo.placa == placa).first()
+        return veiculo
     

@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from src.database.db import Base
 import enum
 
+
 class PermissaoEnum(str, enum.Enum):
   MOTORISTA = 'motorista'
   GESTOR = 'gestor' # Pensar possibilidades de permissões de acesso ao sistema
@@ -21,4 +22,4 @@ class Usuario(Base):
   nome = Column(String(255), nullable=False)
   permissao = Column(Enum(PermissaoEnum), default=PermissaoEnum.GESTOR, nullable=False)
   status = Column(Enum(Status), default=Status.ATIVO, nullable=False)
-  
+  formularios = relationship("Formulario", back_populates="usuario")

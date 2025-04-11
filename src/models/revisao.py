@@ -8,4 +8,5 @@ class Revisao(Base):
   id = Column(Integer, primary_key=True)
   data = Column(DateTime,nullable=False)
   notificacao = Column(String(120), nullable=False)
-  id_veiculo = Column(String(7), ForeignKey('veiculos.id'), nullable=False)
+  id_veiculo = Column(Integer, ForeignKey('veiculos.id'), nullable=False)
+  formularios = relationship("Formulario", back_populates="revisao")

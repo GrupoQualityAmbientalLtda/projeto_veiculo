@@ -18,7 +18,7 @@ from src.dao.dao_destinos import DaoDestino
 from datetime import datetime
 
 #drop_tables()
-#create_tables()
+create_tables()
 
 # Criação de veículo
 # session = create_session()

@@ -2,14 +2,17 @@ from src.models.formulario import Formulario
 
 class DaoFormulario:
     @classmethod
-    def criar_formulario(cls, session, id_usuario, id_veiculo, tipo, id_revisao, data, observacao):
+    def criar_formulario(cls, session, id_usuario,id_veiculo, tipo, id_revisao, data, observacao, quilometragem, horario):
         formulario = Formulario(
-            id_usuario=id_usuario,
+            # ID USUARIO REMOVIDO, UTILIZAR SESSAO
+            id_usuario = id_usuario,
             id_veiculo=id_veiculo,
             tipo=tipo,
             id_revisao = id_revisao,
             data=data,
-            observacao=observacao
+            observacao=observacao,
+            quilometragem=quilometragem,
+            horario=horario
         )
         session.add(formulario)
         session.commit()
