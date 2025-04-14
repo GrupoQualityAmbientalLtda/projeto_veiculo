@@ -3,16 +3,18 @@ from src.models.formulario import Formulario
 from src.models.veiculo import Veiculo
 from src.models.revisao import Revisao
 from src.models.destinos import Destino
+from src.models.usuario import Usuario
 
 # telas
 tela_login = st.Page(r'src\views\login\view_login.py', title='Tela de Login')
-tela_cadatro = st.Page(r'src\views\cadastro\view_cadastro.py', title='Tela de Cadastro')
+tela_cadastro = st.Page(r'src\views\cadastro\view_cadastro.py', title='Tela de Cadastro')
 formulario = st.Page(r'src\views\formulario\view_formulario.py', title ='Formulário')
 revisao = st.Page(r'src\views\revisao\view_revisao.py', title='Revisão')
 usuarios = st.Page(r'src\views\usuarios\view_usuarios.py', title='Consulta de Usuários')
+veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Criação de Veículos')
 
 # barra de navegação
-pagina = st.navigation([tela_cadatro,tela_login, formulario, revisao, usuarios],)
+pagina = st.navigation([tela_login, formulario, revisao, usuarios, veiculos],)
 
 # página selecionada
 pagina.run()

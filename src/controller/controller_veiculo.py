@@ -30,10 +30,13 @@ class ControllerVeiculo:
             return campos_validados
         with create_session() as session:
             try:
-                veiculos = DaoVeiculo.criar_veiculo(placa, modelo, cor, odometro, avariado)
-                return veiculos
+                # Agora passando a session corretamente
+                veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado)
+                return veiculo
             except Exception as e:
                 print(f'Erro inesperado: {e}')
+                session.rollback()
+                return False
         
     @classmethod
     def deletar_veiculo(cls, id):
