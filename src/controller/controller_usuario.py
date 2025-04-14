@@ -77,21 +77,21 @@ class ControllerUsuario:
                 print(f'Erro gerado {e}')
                 session.rollback()
                 return None
-            
+
     @classmethod
     def carregar_dataframe_usuarios(cls):
-        usuarios = cls.listar_usuarios()
-        # , columns=['ID','Nome','Login','Permissao','Status']
-        dataframe = pd.DataFrame(usuarios)
-        return dataframe
-    
-    @classmethod
-    def transformar_linha_dicionario(cls, linha):
-        dados_usuario = {
-                'id': linha.loc[linha.index[0], 'Id'],
-                'nome': linha.loc[linha.index[0], 'Nome'],
-                'login': linha.loc[linha.index[0], 'login'],
-                'permissao': linha.loc[linha.index[0], 'permissao'],
-                'status': linha.loc[linha.index[0], 'Status'].value
-            }
-        return dados_usuario
+        with create_session() as session:
+            usuarios = DaoUsuario.listar_todos(session)
+
+            dataframe_usuario = pd.DataFrame([
+                {
+                    "ID": usuario.id,
+                    "Login": usuario.login,
+                    "Nome": usuario.nome,
+                    "Senha": usuario.senha,
+                    "Permissao": usuario.permissao,
+                    "Status": usuario.status.value if usuario.status else None
+                }
+                for usuario in usuarios
+            ])
+            return dataframe_usuario

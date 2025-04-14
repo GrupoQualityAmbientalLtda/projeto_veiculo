@@ -1,6 +1,7 @@
 from src.database.db import create_session
 from src.dao.dao_veiculo import DaoVeiculo
 from src.models.veiculo import Veiculo
+import pandas as pd
 
 class ControllerVeiculo:
     @classmethod
@@ -61,3 +62,22 @@ class ControllerVeiculo:
                 print(f'Erro gerado {e}')
                 session.rollback()
                 return None
+            
+    @classmethod
+    def carregar_dataframe_veiculos(cls):
+        with create_session() as session:
+            veiculos = DaoVeiculo.listar_todos_veiculos(session)
+
+            dataframe_veiculo = pd.DataFrame([
+                {
+                    "ID": veiculo.id,
+                    "Placa": veiculo.placa,
+                    "Modelo": veiculo.modelo,
+                    "Cor": veiculo.cor,
+                    "Odometro": veiculo.odometro,
+                    "Avariado": "Sim" if veiculo.avariado else "Não",
+                    "Status": veiculo.status.value if veiculo.status else None
+                }
+                for veiculo in veiculos
+            ])
+            return dataframe_veiculo

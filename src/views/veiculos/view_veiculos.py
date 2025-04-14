@@ -34,3 +34,10 @@ def criar_veiculo():
             st.error('Erro ao cadastrar o veículo!')
 if st.button("Novo Veículo"):
     criar_veiculo()
+
+@st.cache_data
+def carregar_dataframe():
+    return ControllerVeiculo.carregar_dataframe_veiculos()
+
+df = carregar_dataframe()
+st.dataframe(df, use_container_width=True)
