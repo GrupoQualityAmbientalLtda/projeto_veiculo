@@ -5,7 +5,7 @@ import pandas as pd
 
 class ControllerVeiculo:
     @classmethod
-    def validar_campos_veiculo(cls, placa, modelo, cor, odometro, avariado):
+    def validar_campos_veiculo(cls, placa, modelo, cor, odometro, avariado, status):
         if not placa:
             return "Placa do veículo não pode estar vazia!"
         if not modelo:
@@ -16,6 +16,8 @@ class ControllerVeiculo:
             return "Odômetro deve ser um número válido e não pode ser negativo!"
         if avariado is None:
             return "Informe se o veículo está ou não avariado."
+        if status is None:
+            return "Informe se o veículo está ou não ativo."
         return True
 
     @classmethod
@@ -25,14 +27,14 @@ class ControllerVeiculo:
             return [veiculo.placa for veiculo in veiculos]
         
     @classmethod
-    def criar_veiculo(cls, placa, modelo, cor, odometro, avariado):
-        campos_validados = cls.validar_campos_veiculo(placa, modelo, cor, odometro, avariado)
+    def criar_veiculo(cls, placa, modelo, cor, odometro, avariado, status):
+        campos_validados = cls.validar_campos_veiculo(placa, modelo, cor, odometro, avariado, status)
         if campos_validados != True:
             return campos_validados
         with create_session() as session:
             try:
                 # Agora passando a session corretamente
-                veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado)
+                veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado, status)
                 return veiculo
             except Exception as e:
                 print(f'Erro inesperado: {e}')
@@ -52,10 +54,10 @@ class ControllerVeiculo:
                 print(f"Erro ao deletar veículo: {e}")
                 return False
     @classmethod
-    def atualizar_veiculo_pelo_id(cls, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado):
+    def atualizar_veiculo_pelo_id(cls, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status):
         with create_session() as session:
             try:
-                DaoVeiculo.atualizar_veiculo(session, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado)
+                DaoVeiculo.atualizar_veiculo(session, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status)
                 session.commit()
                 return True
             except Exception as e:
@@ -80,4 +82,6 @@ class ControllerVeiculo:
                 }
                 for veiculo in veiculos
             ])
+            dataframe_veiculo['Seleção'] = False
+            dataframe_veiculo = dataframe_veiculo.reindex(columns=['Seleção', 'ID', 'Placa', 'Modelo', 'Cor', 'Odometro', 'Avariado', 'Status'])
             return dataframe_veiculo

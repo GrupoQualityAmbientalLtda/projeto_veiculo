@@ -28,6 +28,8 @@ def criar_usuario():
                                                             status = status)
         if usuario_salvo:
             st.success('Usuário Cadastrado com Sucesso!')
+            st.cache_data.clear()
+            st.rerun()
         else:
             st.error('Erro ao cadastrar o usuário!')
 
@@ -66,7 +68,7 @@ if st.button("Atualizar Usuário"):
 def carregar_dataframe():
     return ControllerUsuario.carregar_dataframe_usuarios()
 
-df = carregar_dataframe()
-linha_selecionada = st.data_editor(df, use_container_width=True)
+dataframe_veiculo = carregar_dataframe()
+linha_selecionada = st.data_editor(dataframe_veiculo, use_container_width=True)
 
 
