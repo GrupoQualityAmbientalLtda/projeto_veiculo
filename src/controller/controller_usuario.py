@@ -67,10 +67,10 @@ class ControllerUsuario:
                                        usuario.status.value if hasattr(usuario.status, "value") else str(usuario.status)))
             return lista_usuarios
     @classmethod
-    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_permissao, novo_status):
+    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_senha,nova_permissao, novo_status):
         with create_session() as session:
             try:
-                DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_permissao, novo_status)
+                DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status)
                 session.commit()
                 return True
             except Exception as e:
@@ -94,4 +94,6 @@ class ControllerUsuario:
                 }
                 for usuario in usuarios
             ])
+            dataframe_usuario['Seleção'] = False
+            dataframe_usuario = dataframe_usuario.reindex(columns=['Seleção', 'ID', 'Login', 'Nome', 'Senha', 'Permissao', 'Status'])
             return dataframe_usuario
