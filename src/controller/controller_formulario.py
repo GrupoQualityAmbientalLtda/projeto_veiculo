@@ -57,9 +57,19 @@ class ControllerFormulario:
     def obter_formularios_por_id(cls, id):
         with create_session() as session:
             try:
-                formulario = DaoFormulario.obter_formulario_por_id( session, id)
+                formulario = DaoFormulario.obter_formulario_por_id(session, id)
+                return formulario
             except Exception as e:
                 print(f'Erro inesperado: {e}')
+
+    @classmethod
+    def obter_todos_formularios(cls):
+        with create_session() as session:
+            try:
+                formulario = DaoFormulario.obter_todos_formularios(session)
+                return formulario
+            except Exception as e:
+                print(f'Erro inesperado {e}')
 
     
 

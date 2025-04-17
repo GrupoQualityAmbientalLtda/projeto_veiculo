@@ -30,3 +30,7 @@ class DaoFormulario:
         """
         formularios = session.query(Formulario).filter(Formulario.id_usuario == id_usuario).all()
         return formularios
+    @classmethod
+    def obter_todos_formularios(cls,session):
+        formulario = session.query(Formulario).all()
+        return formulario
