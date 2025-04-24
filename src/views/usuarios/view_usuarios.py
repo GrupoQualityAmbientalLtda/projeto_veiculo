@@ -77,7 +77,7 @@ if len(selecao) == 1:
         'login': selecao.iloc[0, 2],
         'nome': selecao.iloc[0,3],
         'senha': selecao.iloc[0,4],
-        'permissao': selecao.iloc[0,5].value,
+        'permissao': selecao.iloc[0,5],
         'status': selecao.iloc[0,6]
     }
     st.text(dados)
