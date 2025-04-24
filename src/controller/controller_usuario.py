@@ -89,7 +89,7 @@ class ControllerUsuario:
                     "Login": usuario.login,
                     "Nome": usuario.nome,
                     "Senha": usuario.senha,
-                    "Permissao": usuario.permissao,
+                    "Permissao": usuario.permissao.value,
                     "Status": usuario.status.value if usuario.status else None
                 }
                 for usuario in usuarios

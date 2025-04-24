@@ -61,14 +61,25 @@ def atualizar_usuario():
             st.rerun()
         else:
             st.error('Erro ao atualizar o usuário')
-if st.button("Atualizar Usuário"):
-    atualizar_usuario()
 
 @st.cache_data
 def carregar_dataframe():
     return ControllerUsuario.carregar_dataframe_usuarios()
 
-dataframe_veiculo = carregar_dataframe()
-linha_selecionada = st.data_editor(dataframe_veiculo, use_container_width=True)
+dataframe_usuario = carregar_dataframe()
+linha_selecionada = st.data_editor(dataframe_usuario, use_container_width=True, hide_index=True)
 
+selecao = linha_selecionada[linha_selecionada['Seleção'] == True]
 
+if len(selecao) == 1:
+    dados = {
+        'id': selecao.iloc[0, 1],
+        'login': selecao.iloc[0, 2],
+        'nome': selecao.iloc[0,3],
+        'senha': selecao.iloc[0,4],
+        'permissao': selecao.iloc[0,5].value,
+        'status': selecao.iloc[0,6]
+    }
+    st.text(dados)
+if st.button("Atualizar Usuário"):
+    atualizar_usuario()
