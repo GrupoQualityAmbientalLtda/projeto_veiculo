@@ -35,4 +35,4 @@ def carregar_dataframe():
     return dataframe
 
 dataframe_formulario = carregar_dataframe()
-linha_selecionada = st.data_editor(dataframe_formulario, use_container_width=True)
+linha_selecionada = st.data_editor(dataframe_formulario, use_container_width=True, hide_index=True)

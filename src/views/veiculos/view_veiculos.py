@@ -72,4 +72,4 @@ def carregar_dataframe():
     return ControllerVeiculo.carregar_dataframe_veiculos()
 
 dataframe_veiculo = carregar_dataframe()
-linha_selecionada = st.data_editor(dataframe_veiculo, use_container_width=True)
+linha_selecionada = st.data_editor(dataframe_veiculo, use_container_width=True, hide_index=True)
