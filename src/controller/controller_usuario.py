@@ -97,3 +97,14 @@ class ControllerUsuario:
             dataframe_usuario['Seleção'] = False
             dataframe_usuario = dataframe_usuario.reindex(columns=['Seleção', 'ID', 'Login', 'Nome', 'Senha', 'Permissao', 'Status'])
             return dataframe_usuario
+    @classmethod
+    def transformar_linha_dicionario(cls, linha):
+        dados_usuario = {
+            'id': linha.loc[linha.index[0],'Id'],
+            'login': linha.loc[linha.index[0],'Login'],
+            'senha': linha.loc[linha.index[0], 'Senha'],
+            'nome': linha.loc[linha.index[0], 'Nome'],
+            'permissao': linha.loc[linha.index[0],'Permissão'].value,
+            'status': linha.loc[linha.index[0],'Status'].value
+        }
+        return dados_usuario

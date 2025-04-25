@@ -72,7 +72,7 @@ linha_selecionada = st.data_editor(dataframe_usuario, use_container_width=True, 
 selecao = linha_selecionada[linha_selecionada['Seleção'] == True]
 
 if len(selecao) == 1:
-    dados = {
+    dados_usuario = {
         'id': selecao.iloc[0, 1],
         'login': selecao.iloc[0, 2],
         'nome': selecao.iloc[0,3],
@@ -80,6 +80,6 @@ if len(selecao) == 1:
         'permissao': selecao.iloc[0,5],
         'status': selecao.iloc[0,6]
     }
-    st.text(dados)
+    st.text(dados_usuario)
 if st.button("Atualizar Usuário"):
     atualizar_usuario()
