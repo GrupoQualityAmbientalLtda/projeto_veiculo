@@ -100,11 +100,11 @@ class ControllerUsuario:
     @classmethod
     def transformar_linha_dicionario(cls, linha):
         dados_usuario = {
-            'id': linha.loc[linha.index[0],'Id'],
-            'login': linha.loc[linha.index[0],'Login'],
-            'senha': linha.loc[linha.index[0], 'Senha'],
-            'nome': linha.loc[linha.index[0], 'Nome'],
-            'permissao': linha.loc[linha.index[0],'Permissão'].value,
-            'status': linha.loc[linha.index[0],'Status'].value
+            'id': linha.iloc[0],  # Primeira coluna, correspondente ao 'ID'
+            'login': linha.iloc[1],  # Segunda coluna, correspondente ao 'Login'
+            'senha': linha.iloc[2],  # Terceira coluna, correspondente ao 'Senha'
+            'nome': linha.iloc[3],  # Quarta coluna, correspondente ao 'Nome'
+            'permissao': linha.iloc[4].value if linha.iloc[4] else None,  # Quinta coluna, correspondente ao 'Permissao'
+            'status': linha.iloc[5].value if linha.iloc[5] else None
         }
         return dados_usuario

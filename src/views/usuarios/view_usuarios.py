@@ -37,30 +37,32 @@ if st.button("Novo Usuário"):
     criar_usuario()
 
 @st.dialog(title='Editar Usuário')
-def atualizar_usuario():
-    id = st.number_input('ID',value=0,min_value=0)
-    novo_nome = st.text_input('Novo Nome')
-    novo_login = st.text_input('Novo Login')
-    nova_senha = st.text_input('Nova Senha', type='password')
+def atualizar_usuario(dados_usuario):
+    id = st.number_input('ID', value=dados_usuario['id'], min_value=0, disabled=True)  # ID fixo
+    novo_nome = st.text_input('Novo Nome', value=dados_usuario['nome'])
+    novo_login = st.text_input('Novo Login', value=dados_usuario['login'])
+    nova_senha = st.text_input('Nova Senha', type='password')  # Senha em branco por padrão
     lista_status = [status.value for status in Status]
-    novo_status = st.selectbox('Novo Status', lista_status)
+    novo_status = st.selectbox('Novo Status', lista_status, index=lista_status.index(dados_usuario['status']) if dados_usuario['status'] else 0)
     lista_permissao = [permissao.value for permissao in PermissaoEnum]
-    nova_permissao = st.selectbox('Nova Permissão', lista_permissao)
+    nova_permissao = st.selectbox('Nova Permissão', lista_permissao, index=lista_permissao.index(dados_usuario['permissao']) if dados_usuario['permissao'] else 0)
     botao_atualizar = st.button('Atualizar Usuário', key='botao_atualizar_usuario')
 
     if botao_atualizar:
-        usuario_atualizado = ControllerUsuario.atualizar_usuario_pelo_id(id = id,
-                                                                         novo_nome = novo_nome, 
-                                                                         novo_login = novo_login,
-                                                                         nova_senha = nova_senha, 
-                                                                         nova_permissao = nova_permissao, 
-                                                                         novo_status = novo_status)
-        if usuario_atualizado:
+        usuario_atualizado = ControllerUsuario.atualizar_usuario_pelo_id(
+            id=dados_usuario['id'],
+            novo_nome=novo_nome,
+            novo_login=novo_login,
+            nova_senha=nova_senha,
+            nova_permissao=nova_permissao,
+            novo_status=novo_status
+        )
+        if usuario_atualizado == True:
             st.success('Usuário Atualizado com Sucesso!')
             st.cache_data.clear()
             st.rerun()
         else:
-            st.error('Erro ao atualizar o usuário')
+            st.error(f'Erro ao atualizar o usuário: {usuario_atualizado}')
 
 @st.cache_data
 def carregar_dataframe():
@@ -80,6 +82,6 @@ if len(selecao) == 1:
         'permissao': selecao.iloc[0,5],
         'status': selecao.iloc[0,6]
     }
-    st.text(dados_usuario)
-if st.button("Atualizar Usuário"):
-    atualizar_usuario()
+
+if st.button("Atualizar Usuário") and len(selecao) == 1:
+    atualizar_usuario(dados_usuario)

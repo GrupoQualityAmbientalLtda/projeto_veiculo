@@ -15,7 +15,7 @@ usuarios = st.Page(r'src\views\usuarios\view_usuarios.py', title='Consulta de Us
 veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Criação de Veículos')
 
 # barra de navegação
-pagina = st.navigation([tela_login, formulario, consulta_formularios ,revisao, usuarios, veiculos],)
+pagina = st.navigation([tela_login, formulario, revisao, consulta_formularios, usuarios, veiculos],)
 
 # página selecionada
 pagina.run()
