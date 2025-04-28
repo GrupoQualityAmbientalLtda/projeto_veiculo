@@ -67,16 +67,24 @@ class ControllerUsuario:
                                        usuario.status.value if hasattr(usuario.status, "value") else str(usuario.status)))
             return lista_usuarios
     @classmethod
-    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_senha,nova_permissao, novo_status):
+    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status):
         with create_session() as session:
             try:
-                DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status)
-                session.commit()
-                return True
+               DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status)
+               session.commit()
+               return True
+
+            # except ValueError as ve:
+            #     # Erro de validação (usuário não encontrado)
+            #     print(f"Erro de validação: {ve}")
+            #     session.rollback()  # Revertendo a transação em caso de erro
+            #     return str(ve)  # Retornando a mensagem de erro (usuário não encontrado)
+
             except Exception as e:
-                print(f'Erro gerado {e}')
-                session.rollback()
-                return None
+                # Erro genérico (erro inesperado)
+                print(f"Erro inesperado: {e}")
+                session.rollback()  # Revertendo a transação
+                return f"Erro inesperado: {e}"  # Retorna o erro genérico
 
     @classmethod
     def carregar_dataframe_usuarios(cls):

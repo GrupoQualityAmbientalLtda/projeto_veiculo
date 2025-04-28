@@ -49,20 +49,22 @@ def atualizar_usuario(dados_usuario):
     botao_atualizar = st.button('Atualizar Usuário', key='botao_atualizar_usuario')
 
     if botao_atualizar:
-        usuario_atualizado = ControllerUsuario.atualizar_usuario_pelo_id(
-            id=dados_usuario['id'],
+        resultado = ControllerUsuario.atualizar_usuario_pelo_id(
+            id=id,
             novo_nome=novo_nome,
             novo_login=novo_login,
             nova_senha=nova_senha,
             nova_permissao=nova_permissao,
             novo_status=novo_status
         )
-        if usuario_atualizado == True:
+
+        if resultado == True:
             st.success('Usuário Atualizado com Sucesso!')
             st.cache_data.clear()
             st.rerun()
         else:
-            st.error(f'Erro ao atualizar o usuário: {usuario_atualizado}')
+            st.error(f"Erro ao atualizar o usuário: {resultado}")  # Exibe o erro detalhado retornado pela função
+
 
 @st.cache_data
 def carregar_dataframe():
