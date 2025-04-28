@@ -57,7 +57,7 @@ class ControllerVeiculo:
     def atualizar_veiculo_pelo_id(cls, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status):
         with create_session() as session:
             try:
-                DaoVeiculo.atualizar_veiculo(session, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status)
+                DaoVeiculo.atualizar_veiculo_pelo_id(session, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status)
                 session.commit()
                 return True
             except Exception as e:

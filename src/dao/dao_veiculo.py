@@ -27,4 +27,19 @@ class DaoVeiculo:
             session.commit()
             return True
         return False
+    @classmethod
+    def atualizar_veiculo_pelo_id(cls, session, id, nova_placa, novo_modelo, nova_cor, novo_odometro, novo_avariado, novo_status):
+        veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
+        if veiculo is None:
+            raise ValueError(f"Veículo com ID {id} não encontrado.")  # Dispara erro se não encontrar
+        
+        veiculo.placa = nova_placa
+        veiculo.modelo = novo_modelo
+        veiculo.cor = nova_cor
+        veiculo.odometro = novo_odometro
+        veiculo.avariado = novo_avariado
+        veiculo.status = novo_status
+        
+        session.add(veiculo)  # Atualiza o objeto na sessão
+        return veiculo
             

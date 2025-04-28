@@ -39,12 +39,12 @@ if st.button("Novo Veículo"):
     criar_veiculo()
 
 @st.dialog(title='Editar Veículo')
-def atualizar_veiculo():
-    id = st.number_input('ID',value=0,min_value=0)
-    nova_placa = st.text_input('Nova Placa')
-    novo_modelo = st.text_input('Novo Modelo')
-    nova_cor = st.text_input('Nova Cor')
-    novo_odometro = st.number_input(label="Quilometragem Inicial",value=0,min_value=0)
+def atualizar_veiculo(dados_veiculo):
+    id = st.number_input('ID', value=dados_veiculo['id'], min_value=0, disabled=True)    
+    nova_placa = st.text_input('Nova Placa',value=dados_veiculo['placa'])
+    novo_modelo = st.text_input('Novo Modelo', value=dados_veiculo['modelo'])
+    nova_cor = st.text_input('Nova Cor', value=dados_veiculo['cor'])
+    novo_odometro = st.number_input(label="Quilometragem Inicial",value=dados_veiculo['odometro'],min_value=0)
     novo_avariado = st.toggle(label='Avariado?')
     lista_status = [status.value for status in Status]
     novo_status = st.selectbox('Novo Status', lista_status)
@@ -59,17 +59,33 @@ def atualizar_veiculo():
                                                                          novo_odometro = novo_odometro,
                                                                          novo_avariado = novo_avariado,
                                                                          novo_status = novo_status)
-        if veiculo_atualizado:
+        if veiculo_atualizado == True:
             st.success('Veículo atualizado')
             st.cache_data.clear()
             st.rerun()
         else:
-            st.error('Erro ao atualizar o veículo')
-if st.button('Atualizar Veículo'):
-    atualizar_veiculo()
+            st.error(f"Erro ao atualizar o usuário: {veiculo_atualizado}")
+#if st.button('Atualizar Veículo'):
+    #atualizar_veiculo()
 @st.cache_data
 def carregar_dataframe():
     return ControllerVeiculo.carregar_dataframe_veiculos()
 
 dataframe_veiculo = carregar_dataframe()
 linha_selecionada = st.data_editor(dataframe_veiculo, use_container_width=True, hide_index=True)
+
+selecao = linha_selecionada[linha_selecionada['Seleção'] == True]
+
+if len(selecao) == 1:
+    dados_veiculo = {
+        'id': selecao.iloc[0, 1],
+        'placa': selecao.iloc[0, 2],
+        'modelo': selecao.iloc[0,3],
+        'cor': selecao.iloc[0,4],
+        'odometro': selecao.iloc[0,5],
+        'avariado': selecao.iloc[0,6],
+        'status': selecao.iloc[0,7]
+    }
+
+if st.button("Atualizar Veículo") and len(selecao) == 1:
+    atualizar_veiculo(dados_veiculo)
