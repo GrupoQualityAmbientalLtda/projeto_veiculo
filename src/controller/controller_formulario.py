@@ -5,7 +5,7 @@ from src.dao.dao_destinos import DaoDestino
 
 class ControllerFormulario:
     @classmethod
-    def validar_campos_formulario(cls, id_usuario, id_veiculo,tipo,id_revisao,data,destino,horario,quilometragem):
+    def validar_campos_formulario(cls, id_usuario, id_veiculo,tipo,id_revisao,data,destino,quilometragem):
         if not id_usuario:
             return "Usuário não identificado!"
         if not id_veiculo:
@@ -18,15 +18,13 @@ class ControllerFormulario:
             return "Data do envio não pode estar vazia!"
         if not destino:
             return "Destino não pode estar vazio!"
-        if not horario:
-            return "Horário não pode estar vazio!"
         if not quilometragem:
             return "Quilometragem não pode estar vazia!"
         return True
     
     @classmethod
-    def criar_formulario(cls, id_usuario,id_veiculo, quilometragem, tipo, id_revisao, data, destino, horario, observacao):
-        validado = cls.validar_campos_formulario(id_veiculo, id_usuario,tipo, id_revisao, data, destino, horario, quilometragem)
+    def criar_formulario(cls, id_usuario,id_veiculo, quilometragem, tipo, id_revisao, data, destino, observacao):
+        validado = cls.validar_campos_formulario(id_veiculo, id_usuario,tipo, id_revisao, data, destino, quilometragem)
         if validado != True:
             return validado  # retorna string com erro
 
@@ -41,7 +39,6 @@ class ControllerFormulario:
                     data=data,
                     observacao=observacao,
                     quilometragem=quilometragem,
-                    horario=horario
                 )
                 DaoDestino.criar_destino(
                     session=session,
@@ -50,7 +47,7 @@ class ControllerFormulario:
                 )
 
                 session.commit()
-                return formulario
+                return formulario.id
             except Exception as e:
                 session.rollback()
                 print(f'Erro ao criar formulário: {e}')
@@ -60,9 +57,19 @@ class ControllerFormulario:
     def obter_formularios_por_id(cls, id):
         with create_session() as session:
             try:
-                formulario = DaoFormulario.obter_formulario_por_id( session, id)
+                formulario = DaoFormulario.obter_formulario_por_id(session, id)
+                return formulario
             except Exception as e:
                 print(f'Erro inesperado: {e}')
+
+    @classmethod
+    def obter_todos_formularios(cls):
+        with create_session() as session:
+            try:
+                formulario = DaoFormulario.obter_todos_formularios(session)
+                return formulario
+            except Exception as e:
+                print(f'Erro inesperado {e}')
 
     
 

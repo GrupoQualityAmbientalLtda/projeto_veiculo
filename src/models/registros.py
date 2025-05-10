@@ -9,3 +9,4 @@ class Registro(Base):
 
     foto = Column(LargeBinary, nullable=False)
     id_avaria = Column(Integer, ForeignKey('avarias.id'))
+    id_formulario = Column(Integer, ForeignKey('formularios.id'), nullable=False)

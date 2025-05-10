@@ -2,9 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum, Time
 from sqlalchemy.orm import relationship
 from src.database.db import Base
 import enum
-from src.models.usuario import Usuario
-from src.models.veiculo import Veiculo
-from src.models.revisao import Revisao
+
 
 #class StatusEnum(str, enum.Enum): # SABER SE HÁ A NECESSIDADE DE MARCAR COMO CUMPRIDO OU NAO (A CAMINHO, EM PROCESSAMENTO)
   #CAMINHO = 'A Caminho'
@@ -24,7 +22,7 @@ class Formulario(Base):
   tipo = Column(Enum(TipoEnum), default=TipoEnum.SAIDA, nullable=False)
   observacao = Column(String(255))
   quilometragem = Column(Integer, nullable=False)
-  horario = Column(Time, nullable=False)
+
 
   # Chaves Estrangeiras
   id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)

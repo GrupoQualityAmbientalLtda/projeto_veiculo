@@ -19,10 +19,12 @@ class DaoUsuario:
         return usuario
     
     @classmethod
-    def atualizar_usuario_pelo_id(cls, session, id, novo_nome, novo_login, nova_permissao, novo_status):
-        usuario = session.query(usuario).filter(usuario.id == id).first()
+    def atualizar_usuario_pelo_id(cls, session, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status):
+        usuario = session.query(Usuario).filter(Usuario.id == id).first()
         usuario.nome = novo_nome
-        usuario.status = novo_status
         usuario.login = novo_login
+        usuario.senha = nova_senha
         usuario.permissao = nova_permissao
+        usuario.status = novo_status
+        session.add(usuario)
         return usuario

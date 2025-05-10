@@ -67,29 +67,52 @@ class ControllerUsuario:
                                        usuario.status.value if hasattr(usuario.status, "value") else str(usuario.status)))
             return lista_usuarios
     @classmethod
-    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_permissao, novo_status):
+    def atualizar_usuario_pelo_id(cls, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status):
         with create_session() as session:
             try:
-                DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_permissao, novo_status)
-                session.commit()
-                return True
+               DaoUsuario.atualizar_usuario_pelo_id(session, id, novo_nome, novo_login, nova_senha, nova_permissao, novo_status)
+               session.commit()
+               return True
+
+            # except ValueError as ve:
+            #     # Erro de validação (usuário não encontrado)
+            #     print(f"Erro de validação: {ve}")
+            #     session.rollback()  # Revertendo a transação em caso de erro
+            #     return str(ve)  # Retornando a mensagem de erro (usuário não encontrado)
+
             except Exception as e:
-                print(f'Erro gerado {e}')
-                session.rollback()
-                return None
-            
+                # Erro genérico (erro inesperado)
+                print(f"Erro inesperado: {e}")
+                session.rollback()  # Revertendo a transação
+                return f"Erro inesperado: {e}"  # Retorna o erro genérico
+
     @classmethod
     def carregar_dataframe_usuarios(cls):
-        usuarios = cls.listar_usuarios()
-        dataframe = pd.DataFrame(usuarios, columns=['ID','Nome','Login','Permissao','Status'])
-        return dataframe
+        with create_session() as session:
+            usuarios = DaoUsuario.listar_todos(session)
+
+            dataframe_usuario = pd.DataFrame([
+                {
+                    "ID": usuario.id,
+                    "Login": usuario.login,
+                    "Nome": usuario.nome,
+                    "Senha": usuario.senha,
+                    "Permissao": usuario.permissao.value,
+                    "Status": usuario.status.value if usuario.status else None
+                }
+                for usuario in usuarios
+            ])
+            dataframe_usuario['Seleção'] = False
+            dataframe_usuario = dataframe_usuario.reindex(columns=['Seleção', 'ID', 'Login', 'Nome', 'Senha', 'Permissao', 'Status'])
+            return dataframe_usuario
     @classmethod
     def transformar_linha_dicionario(cls, linha):
         dados_usuario = {
-                'id': linha.loc[linha.index[0], 'Id'],
-                'nome': linha.loc[linha.index[0], 'Nome'],
-                'login': linha.loc[linha.index[0], 'login'],
-                'permissao': linha.loc[linha.index[0], 'permissao'],
-                'status': linha.loc[linha.index[0], 'Status'].value
-            }
+            'id': linha.iloc[0],  # Primeira coluna, correspondente ao 'ID'
+            'login': linha.iloc[1],  # Segunda coluna, correspondente ao 'Login'
+            'senha': linha.iloc[2],  # Terceira coluna, correspondente ao 'Senha'
+            'nome': linha.iloc[3],  # Quarta coluna, correspondente ao 'Nome'
+            'permissao': linha.iloc[4].value if linha.iloc[4] else None,  # Quinta coluna, correspondente ao 'Permissao'
+            'status': linha.iloc[5].value if linha.iloc[5] else None
+        }
         return dados_usuario

@@ -3,8 +3,8 @@ from src.database.db import create_session
 
 class DaoRegistro:
     @classmethod
-    def criar_registro(cls, session, foto, id_avaria):
-        registros = Registro(foto = foto, id_avaria = id_avaria)
+    def criar_registro(cls, session, foto, id_avaria, id_formulario):
+        registros = Registro(foto = foto, id_avaria = id_avaria, id_formulario = id_formulario)
         session.add(registros)
         session.commit()
         return registros
@@ -17,8 +17,3 @@ class DaoRegistro:
         
     # Terminar inserção de Imagens
 
-def salvar_registro(imagem_binaria, id_avaria):
-    with create_session() as session:
-        registros = Registro(foto=imagem_binaria, id_avaria=id_avaria)
-        session.add(registros)
-        session.commit()

@@ -23,3 +23,7 @@ class DaoDestino:
         session.delete(delete_destinos)
         session.commit()
         return delete_destinos
+    @classmethod
+    def obter_todos_destinos(cls, session):
+        destinos = session.query(Destino).all()
+        return destinos
