@@ -13,7 +13,7 @@ formulario = st.Page(r'src\views\formulario\view_formulario.py', title ='Formul�
 consulta_formularios = st.Page(r'src\views\consulta_formulario\view_consulta_formularios.py', title = 'Consulta de Formulários')
 revisao = st.Page(r'src\views\revisao\view_revisao.py', title='Revisão')
 usuarios = st.Page(r'src\views\usuarios\view_usuarios.py', title='Consulta de Usuários')
-veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Criação de Veículos')
+veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Consulta de Veículos')
 
 if 'usuario' not in st.session_state:
     st.session_state.usuario = None
@@ -26,12 +26,13 @@ if not st.user.is_logged_in:
         
         fazer_login = st.form_submit_button("Fazer Login")
     
-        if fazer_login:
+        if fazer_login and login and senha:
             usuario = ControllerUsuario.verificar_login(login, senha)
-            print(usuario)
             if usuario:
                 st.session_state.usuario = usuario
                 st.rerun()
+        if fazer_login and (not login or not senha):
+            st.warning('Login e senha são campos obrigatórios')
 
 if st.session_state.get('usuario') and not st.user.is_logged_in:
     st.login()

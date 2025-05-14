@@ -118,9 +118,14 @@ class ControllerUsuario:
         return dados_usuario
     
     @classmethod
-    def verificar_login(cls, login, senha):
+    def verificar_login(cls, login, senha = None):
         with create_session() as session:
             usuario = DaoUsuario.obter_usuario_pelo_login(session, login, senha)
             if usuario:
                 return True
             return False
+    @classmethod
+    def obter_usuario_pelo_login(cls, login):
+        with create_session() as session:
+            usuario = DaoUsuario.obter_usuario_pelo_login(session, login)
+            return usuario

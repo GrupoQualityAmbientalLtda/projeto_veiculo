@@ -6,6 +6,7 @@ from src.controller.controller_formulario import ControllerFormulario
 from src.controller.controller_veiculo import ControllerVeiculo
 from src.controller.controller_avaria import ControllerAvaria
 from src.controller.controller_registros import ControllerRegistro
+from src.controller.controller_usuario import ControllerUsuario
 
 nomes_avarias = {
     'Água Para-Brisa': 'agua_para_brisa',
@@ -50,9 +51,8 @@ nomes_avarias = {
 }
 
 # IDs temporários - ajuste conforme necessário
-id_veiculo = 1
 id_revisao = 1
-id_usuario = 1
+id_usuario = ControllerUsuario.obter_usuario_pelo_login(st.user.email).id
 
 st.image("imgs/logo.png")
 st.header("Controle de Veículos", divider=True)
@@ -60,6 +60,7 @@ st.header("Controle de Veículos", divider=True)
 with st.form("formulario_veiculo"):
     placas = ControllerVeiculo.listar_placas()
     placa_selecionada = st.selectbox("Placa do Veículo", placas)
+    id_veiculo = ControllerVeiculo.obter_veiculo_por_placa(placa_selecionada)
 
     quilometragem = st.number_input("Quilometragem Inicial", min_value=0, value=0)
     tipo = st.selectbox("Selecione o tipo:", ("Entrada", "Saída"))
