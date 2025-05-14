@@ -1,2 +1,3 @@
 # Ignorar pasta Venv
 .venv
+.streamlit/secrets.toml

@@ -116,3 +116,11 @@ class ControllerUsuario:
             'status': linha.iloc[5].value if linha.iloc[5] else None
         }
         return dados_usuario
+    
+    @classmethod
+    def verificar_login(cls, login, senha):
+        with create_session() as session:
+            usuario = DaoUsuario.obter_usuario_pelo_login(session, login, senha)
+            if usuario:
+                return True
+            return False

@@ -14,6 +14,11 @@ class DaoUsuario:
         return usuario
     
     @classmethod
+    def obter_usuario_pelo_login(cls, session, login, senha):
+        usuario = session.query(Usuario).filter(Usuario.login == login).filter(Usuario.senha == senha).all()
+        return usuario
+    
+    @classmethod
     def listar_todos(cls, session):
         usuario = session.query(Usuario).order_by(Usuario.id).all()
         return usuario
