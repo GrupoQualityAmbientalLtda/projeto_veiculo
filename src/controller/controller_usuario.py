@@ -74,12 +74,6 @@ class ControllerUsuario:
                session.commit()
                return True
 
-            # except ValueError as ve:
-            #     # Erro de validação (usuário não encontrado)
-            #     print(f"Erro de validação: {ve}")
-            #     session.rollback()  # Revertendo a transação em caso de erro
-            #     return str(ve)  # Retornando a mensagem de erro (usuário não encontrado)
-
             except Exception as e:
                 # Erro genérico (erro inesperado)
                 print(f"Erro inesperado: {e}")

@@ -12,7 +12,13 @@ class DaoAvaria:
         session.commit()
         session.refresh(avaria)
         return avaria.id
+    
     @classmethod
     def obter_avaria(cls, session, id):
          avaria = session.query(Avaria).filter(Avaria.id == id).first()
          return avaria
+    
+    @classmethod
+    def listar_avarias(cls, session):
+        avarias = session.query(Avaria).all()
+        return avarias
