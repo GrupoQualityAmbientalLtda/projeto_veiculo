@@ -14,6 +14,7 @@ consulta_formularios = st.Page(r'src\views\consulta_formulario\view_consulta_for
 revisao = st.Page(r'src\views\revisao\view_revisao.py', title='Revisão')
 usuarios = st.Page(r'src\views\usuarios\view_usuarios.py', title='Consulta de Usuários')
 veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Consulta de Veículos')
+avarias = st.Page(r'src\views\avarias\view_avarias.py', title='Consulta de Avarias')
 
 if 'usuario' not in st.session_state:
     st.session_state.usuario = None
@@ -37,7 +38,7 @@ if not st.user.is_logged_in:
 if st.session_state.get('usuario') and not st.user.is_logged_in:
     st.login()
 if st.user.is_logged_in:
-    pagina = st.navigation([formulario, consulta_formularios, usuarios, veiculos])
+    pagina = st.navigation([formulario, consulta_formularios, usuarios, veiculos, avarias])
     # página selecionada
     pagina.run()
     with st.sidebar:
