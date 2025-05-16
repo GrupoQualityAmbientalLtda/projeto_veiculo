@@ -2,6 +2,7 @@ from src.models.formulario import Formulario
 from src.dao.dao_formulario import DaoFormulario
 from src.database.db import create_session
 from src.dao.dao_destinos import DaoDestino
+from src.dao.dao_veiculo import DaoVeiculo
 
 class ControllerFormulario:
     @classmethod
@@ -46,12 +47,19 @@ class ControllerFormulario:
                     id_formulario=formulario.id
                 )
 
+                DaoVeiculo.atualizar_odometro_veiculo(
+                    session = session,
+                    id = id_veiculo,
+                    novo_odometro = quilometragem
+
+                )
+
                 session.commit()
                 return formulario.id
             except Exception as e:
                 session.rollback()
                 print(f'Erro ao criar formulário: {e}')
-                return f"Erro ao criar formulário: {e}"
+                return False
         
     @classmethod
     def obter_formularios_por_id(cls, id):

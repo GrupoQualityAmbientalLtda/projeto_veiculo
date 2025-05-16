@@ -1,6 +1,7 @@
 from src.models.veiculo import Veiculo
 
-class DaoVeiculo:
+
+class DaoVeiculo:    
     @classmethod
     def criar_veiculo(cls, session, placa, modelo, cor, odometro, avariado, status):
         veiculo = Veiculo(placa = placa, modelo = modelo, cor = cor, odometro = odometro, avariado = avariado, status = status)
@@ -9,16 +10,19 @@ class DaoVeiculo:
         return veiculo
     
     @classmethod
-    def obter_veiculo(cls, session, id):
+    def obter_veiculo_por_id(cls, session, id):
         veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
         return veiculo
+    
     @classmethod
     def obter_veiculo_por_placa(cls, session, placa):
         veiculo = session.query(Veiculo).filter(Veiculo.placa == placa).first()
         return veiculo
+    
     @classmethod
     def listar_todos_veiculos(cls, session):
         return session.query(Veiculo).all()
+    
     @classmethod
     def deletar_veiculo(cls, session, id):
         veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
@@ -42,4 +46,12 @@ class DaoVeiculo:
         
         session.add(veiculo)  # Atualiza o objeto na sessão
         return veiculo
+    
+    @classmethod
+    def atualizar_odometro_veiculo(cls, session, id, novo_odometro):
+        veiculo = session.query(Veiculo).filter(Veiculo.id == id).first() # Ou veiculo.odometro
+        veiculo.odometro = novo_odometro
+        return veiculo
+
+# UPDATE ODOMETRO
             

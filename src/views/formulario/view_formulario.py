@@ -57,35 +57,39 @@ id_usuario = ControllerUsuario.obter_usuario_pelo_login(st.user.email).id
 st.image("imgs/logo.png")
 st.header("Controle de Veículos", divider=True)
 
+tipo = st.selectbox("Selecione o tipo:", ["Entrada", "Saída"])
+
+
 with st.form("formulario_veiculo"):
     placas = ControllerVeiculo.listar_placas()
     placa_selecionada = st.selectbox("Placa do Veículo", placas)
     id_veiculo = ControllerVeiculo.obter_veiculo_por_placa(placa_selecionada)
-
-    quilometragem = st.number_input("Quilometragem Inicial", min_value=0, value=0)
-    tipo = st.selectbox("Selecione o tipo:", ("Entrada", "Saída"))
+    odometro = ControllerVeiculo.obter_odometro_veiculo(id_veiculo)
+    quilometragem = st.number_input("Quilometragem", min_value=0, value=odometro)
     data = st.date_input("Data", value='today', format="DD/MM/YYYY")
     horario = st.time_input("Horário:")
     data_revisao = st.date_input("Última Revisão:", format="DD/MM/YYYY")
-    observacoes = st.text_area("Alguma observação?")
     destino = st.text_input("Selecione o destino:")
-
-    # Checkboxes de avarias
     opcoes = list(nomes_avarias.keys())
-    for i in range(0, len(opcoes), 3):
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            if i < len(opcoes):
-                st.checkbox(opcoes[i], key=f'checkbox_{i}')
-        with col2:
-            if i + 1 < len(opcoes):
-                st.checkbox(opcoes[i + 1], key=f'checkbox_{i + 1}')
-        with col3:
-            if i + 2 < len(opcoes):
-                st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
+    
+    if tipo == 'Saída':
+        destino = st.text_input("Selecione o destino:")
+    # Checkboxes de avarias
+        for i in range(0, len(opcoes), 3):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                if i < len(opcoes):
+                    st.checkbox(opcoes[i], key=f'checkbox_{i}')
+            with col2:
+                if i + 1 < len(opcoes):
+                    st.checkbox(opcoes[i + 1], key=f'checkbox_{i + 1}')
+            with col3:
+                if i + 2 < len(opcoes):
+                    st.checkbox(opcoes[i + 2], key=f'checkbox_{i + 2}')
 
-    uploaded_file = st.file_uploader("Em caso de Avaria, insira uma imagem.", type=["png", "jpg", "jpeg"])
+        uploaded_file = st.file_uploader("Em caso de Avaria, insira uma imagem.", type=["png", "jpg", "jpeg"])
 
+    observacoes = st.text_area("Alguma observação?")
     if st.form_submit_button("Enviar"):
         data_envio = datetime.combine(data, horario)
 
@@ -114,16 +118,17 @@ with st.form("formulario_veiculo"):
             id_avaria = ControllerAvaria.criar_avaria(id_formulario=id_formulario, **avarias_data)
 
             # Salva imagem (se houver)
-            if uploaded_file:
-                try:
-                    ControllerRegistro.processar_e_salvar_imagem(uploaded_file, id_avaria, id_formulario)
-                    st.success("Imagem salva com sucesso!")
-                except ValueError as e:
-                    st.warning(str(e))
-                except Exception as e:
-                    st.error(f"Erro ao salvar imagem: {e}")
-            else:
-                st.info("Formulário salvo sem imagem.")
-                st.success("Formulário enviado com sucesso.")
+            if tipo == 'Saída':
+                if uploaded_file:
+                    try:
+                        ControllerRegistro.processar_e_salvar_imagem(uploaded_file, id_avaria, id_formulario)
+                        st.success("Imagem salva com sucesso!")
+                    except ValueError as e:
+                        st.warning(str(e))
+                    except Exception as e:
+                        st.error(f"Erro ao salvar imagem: {e}")
+                else:
+                        st.info("Formulário salvo sem imagem.")
+                        st.success("Formulário enviado com sucesso.")
         else:
             st.error("Erro inesperado ao salvar o formulário.")

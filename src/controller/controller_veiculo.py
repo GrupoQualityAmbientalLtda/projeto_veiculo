@@ -21,6 +21,13 @@ class ControllerVeiculo:
         return True
 
     @classmethod
+    def obter_odometro_veiculo(cls, id):
+        with create_session() as session:
+            veiculo = DaoVeiculo.obter_veiculo_por_id(session, id)
+            odometro = veiculo.odometro
+            return odometro
+
+    @classmethod
     def listar_placas(cls):
         with create_session() as session:
             veiculos = DaoVeiculo.listar_todos_veiculos(session)
