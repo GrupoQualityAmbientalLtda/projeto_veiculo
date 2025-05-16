@@ -69,7 +69,7 @@ with st.form("formulario_veiculo"):
     data = st.date_input("Data", value='today', format="DD/MM/YYYY")
     horario = st.time_input("Horário:")
     data_revisao = st.date_input("Última Revisão:", format="DD/MM/YYYY")
-    destino = st.text_input("Selecione o destino:")
+    destino = 'Garagem Quality'
     opcoes = list(nomes_avarias.keys())
     
     if tipo == 'Saída':
@@ -127,8 +127,6 @@ with st.form("formulario_veiculo"):
                         st.warning(str(e))
                     except Exception as e:
                         st.error(f"Erro ao salvar imagem: {e}")
-                else:
-                        st.info("Formulário salvo sem imagem.")
-                        st.success("Formulário enviado com sucesso.")
+            st.success("Formulário enviado com sucesso.")
         else:
             st.error("Erro inesperado ao salvar o formulário.")
