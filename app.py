@@ -44,4 +44,3 @@ if st.user.is_logged_in:
     with st.sidebar:
         if st.button("Log out"):
             st.logout()
-
