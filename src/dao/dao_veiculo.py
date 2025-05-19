@@ -53,5 +53,12 @@ class DaoVeiculo:
         veiculo.odometro = novo_odometro
         return veiculo
 
-# UPDATE ODOMETRO
+    @classmethod
+    def atualizar_avariado_veiculo(cls, session, id, novo_avariado):
+        veiculo = session.query(Veiculo).filter(Veiculo.id == id).first()
+        veiculo.avariado = novo_avariado
+        return veiculo
+
+
+        # Caso haja alguma avaria, é necessário que ocorra um update para TRUE na coluna AVARIADO
             

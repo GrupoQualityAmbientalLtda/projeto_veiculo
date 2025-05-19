@@ -105,6 +105,8 @@ with st.form("formulario_veiculo"):
             observacao=observacoes
         )
 
+        st.cache_data.clear()
+
         if isinstance(id_formulario, str):
             st.error(f"Erro ao enviar: {id_formulario}")
         elif id_formulario:

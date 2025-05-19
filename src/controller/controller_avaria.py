@@ -1,4 +1,6 @@
 from src.dao.dao_avaria import DaoAvaria
+from src.dao.dao_veiculo import DaoVeiculo
+from src.dao.dao_formulario import DaoFormulario
 from src.database.db import create_session
 import pandas as pd
 class ControllerAvaria:
@@ -8,7 +10,15 @@ class ControllerAvaria:
         Cria uma avaria no banco associada a um formulário.
         """
         with create_session() as session:
-            return DaoAvaria.criar_avaria(session, id_formulario=id_formulario, **kwargs)
+            avaria_id = DaoAvaria.criar_avaria(session, id_formulario=id_formulario, **kwargs)
+            formulario = DaoFormulario.obter_formulario_por_id(session, id_formulario)
+            if any(kwargs.values()):
+                DaoVeiculo.atualizar_avariado_veiculo(session, formulario.id_veiculo, True)
+                session.commit()
+            else:
+                DaoVeiculo.atualizar_avariado_veiculo(session, formulario.id_veiculo, False)
+                session.commit()
+            return avaria_id
         
     nomes_avarias = {
         'Água Para-Brisa': 'agua_para_brisa',
