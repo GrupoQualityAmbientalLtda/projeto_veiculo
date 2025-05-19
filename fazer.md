@@ -1,7 +1,8 @@
 
 # MODAL QUE EXIBE QUE O VEICULO ESTA AVARIADO
+Verifica se o veículo consta como avariado == true assim que for selecionado na selectbox, então exibe um st.warning em caso de avariado == true
 
-# PRECISO DE UM UPDATE PARA QUANDO ESTA AVARIADO FIQUE COMO TRUE
+# PRECISO DE UM UPDATE PARA QUANDO ESTA AVARIADO FIQUE COMO TRUE = FEITO
 
 # FUNCAO PARA QUANDO FALTAR 2 MIL KM PARA BATER O ODOMETRO DE VISTORIA, DISPARAR UM E-MAIL
 
