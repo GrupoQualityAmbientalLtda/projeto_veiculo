@@ -33,10 +33,16 @@ class ControllerVeiculo:
             veiculos = DaoVeiculo.listar_todos_veiculos(session)
             return [veiculo.placa for veiculo in veiculos]
     @classmethod
-    def obter_veiculo_por_placa(cls, placa):
+    def obter_id_veiculo_por_placa(cls, placa):
         with create_session() as session:
             veiculo = DaoVeiculo.obter_veiculo_por_placa(session, placa)
             return veiculo.id
+        
+    @classmethod
+    def obter_estado_pela_placa(cls, placa):
+        with create_session() as session:
+            veiculo = DaoVeiculo.obter_veiculo_por_placa(session, placa)
+            return veiculo.avariado
         
     @classmethod
     def criar_veiculo(cls, placa, modelo, cor, odometro, avariado, status):

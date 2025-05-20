@@ -25,3 +25,10 @@ for coluna in dataframe_formatado.columns:
 
 # Exibe o DataFrame
 st.dataframe(dataframe_formatado, use_container_width=True, hide_index=True)
+
+avarias = ControllerAvaria.listar_avarias_verdadeiras()
+
+for avaria in avarias:
+    chaves = [chave for chave in avaria.keys() if chave not in ("ID", "ID Formulário")]
+    texto = ", ".join(chaves)
+    st.text(f"Avarias encontradas: {texto}")

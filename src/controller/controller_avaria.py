@@ -84,3 +84,44 @@ class ControllerAvaria:
             dataframe_avarias = dataframe_avarias.reindex(columns=colunas_ordenadas)
 
             return dataframe_avarias
+    
+    @classmethod
+    def listar_avarias_verdadeiras(cls):
+        with create_session() as session:
+            avaria = DaoAvaria.listar_ultima_avaria(session)
+            resultado = []
+
+            if avaria:
+                avarias_verdadeiras = {
+                    nome_legivel: True
+                    for nome_legivel, nome_interno in cls.nomes_avarias.items()
+                    if getattr(avaria, nome_interno)
+                } 
+                if avarias_verdadeiras:
+                    resultado.append({
+                        "ID": avaria.id,
+                        "ID Formulário": avaria.id_formulario,
+                        **avarias_verdadeiras
+                })
+            return resultado
+
+    # FUNÇÃO EXIBIR TODAS AVARIAS    
+    # @classmethod
+    # def listar_avarias_verdadeiras(cls):
+    #     with create_session() as session:
+    #         avarias = DaoAvaria.listar_avarias(session)
+    #         resultado = []
+
+    #         for avaria in avarias:
+    #             avarias_verdadeiras = {
+    #                 nome_legivel: True
+    #                 for nome_legivel, nome_interno in cls.nomes_avarias.items()
+    #                 if getattr(avaria, nome_interno)
+    #             } 
+    #             if avarias_verdadeiras:
+    #                 resultado.append({
+    #                     "ID": avaria.id,
+    #                     "ID Formulário": avaria.id_formulario,
+    #                     **avarias_verdadeiras
+    #             })
+    #         return resultado

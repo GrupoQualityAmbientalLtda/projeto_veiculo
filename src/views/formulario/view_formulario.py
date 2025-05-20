@@ -63,7 +63,10 @@ tipo = st.selectbox("Selecione o tipo:", ["Entrada", "Saída"])
 with st.form("formulario_veiculo"):
     placas = ControllerVeiculo.listar_placas()
     placa_selecionada = st.selectbox("Placa do Veículo", placas)
-    id_veiculo = ControllerVeiculo.obter_veiculo_por_placa(placa_selecionada)
+    id_veiculo = ControllerVeiculo.obter_id_veiculo_por_placa(placa_selecionada)
+    avariado = ControllerVeiculo.obter_estado_pela_placa(placa_selecionada)
+    if avariado == True:
+        st.warning('Este veículo está avariado!')
     odometro = ControllerVeiculo.obter_odometro_veiculo(id_veiculo)
     quilometragem = st.number_input("Quilometragem", min_value=0, value=odometro)
     data = st.date_input("Data", value='today', format="DD/MM/YYYY")

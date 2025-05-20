@@ -22,3 +22,8 @@ class DaoAvaria:
     def listar_avarias(cls, session):
         avarias = session.query(Avaria).all()
         return avarias
+    
+    @classmethod
+    def listar_ultima_avaria(cls, session):
+        avarias = session.query(Avaria).first()
+        return avarias
