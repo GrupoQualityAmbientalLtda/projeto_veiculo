@@ -67,6 +67,7 @@ with st.form("formulario_veiculo"):
     avariado = ControllerVeiculo.obter_estado_pela_placa(placa_selecionada)
     if avariado == True:
         st.warning('Este veículo está avariado!')
+        st.page_link("src/views/avarias/view_avarias.py", label='Clique aqui para exibir as Avarias Listadas', icon='❗')
     odometro = ControllerVeiculo.obter_odometro_veiculo(id_veiculo)
     quilometragem = st.number_input("Quilometragem", min_value=0, value=odometro)
     data = st.date_input("Data", value='today', format="DD/MM/YYYY")
