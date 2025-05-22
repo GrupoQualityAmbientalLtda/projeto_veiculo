@@ -25,5 +25,5 @@ class DaoAvaria:
     
     @classmethod
     def listar_ultima_avaria(cls, session):
-        avarias = session.query(Avaria).first()
+        avarias = session.query(Avaria).order_by(Avaria.id.desc()).first()
         return avarias

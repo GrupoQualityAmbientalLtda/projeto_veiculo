@@ -15,13 +15,15 @@ from src.dao.dao_usuario import DaoUsuario
 from src.dao.dao_veiculo import DaoVeiculo
 from src.dao.dao_destinos import DaoDestino
 
+from src.utils.simple_mail import send_mail_zepto
+
 from datetime import datetime
 
 #drop_tables()
-create_tables()
+# create_tables()
 
 # Criação de veículo
-session = create_session()
+# session = create_session()
 # placa = 'BUI8713'
 # modelo = 'Strada'
 # cor = 'Branca'
