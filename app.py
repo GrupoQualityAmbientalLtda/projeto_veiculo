@@ -5,16 +5,17 @@ from src.models.revisao import Revisao
 from src.models.destinos import Destino
 from src.models.usuario import Usuario
 from src.controller.controller_usuario import ControllerUsuario
+from pathlib import Path
 
 # telas
-tela_login = st.Page(r'src\views\login\view_login.py', title='Tela de Login')
-tela_cadastro = st.Page(r'src\views\cadastro\view_cadastro.py', title='Tela de Cadastro')
-formulario = st.Page(r'src\views\formulario\view_formulario.py', title ='Formulário')
-consulta_formularios = st.Page(r'src\views\consulta_formulario\view_consulta_formularios.py', title = 'Consulta de Formulários')
-revisao = st.Page(r'src\views\revisao\view_revisao.py', title='Revisão')
-usuarios = st.Page(r'src\views\usuarios\view_usuarios.py', title='Consulta de Usuários')
-veiculos = st.Page(r'src\views\veiculos\view_veiculos.py', title='Consulta de Veículos')
-avarias = st.Page(r'src\views\avarias\view_avarias.py', title='Consulta de Avarias')
+tela_login = st.Page(str(Path("src") / "views" / "login" / "view_login.py"), title="Tela de Login")
+tela_cadastro = st.Page(str(Path("src") / "views" / "cadastro" / "view_cadastro.py"), title="Tela de Cadastro")
+formulario = st.Page(str(Path("src") / "views" / "formulario" / "view_formulario.py"), title="Formulário")
+consulta_formularios = st.Page(str(Path("src") / "views" / "consulta_formulario" / "view_consulta_formularios.py"), title="Consulta de Formulários")
+revisao = st.Page(str(Path("src") / "views" / "revisao" / "view_revisao.py"), title="Revisão")
+usuarios = st.Page(str(Path("src") / "views" / "usuarios" / "view_usuarios.py"), title="Consulta de Usuários")
+veiculos = st.Page(str(Path("src") / "views" / "veiculos" / "view_veiculos.py"), title="Consulta de Veículos")
+avarias = st.Page(str(Path("src") / "views" / "avarias" / "view_avarias.py"), title="Consulta de Avarias")
 
 if 'usuario' not in st.session_state:
     st.session_state.usuario = None
