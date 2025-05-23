@@ -15,59 +15,9 @@ from src.dao.dao_usuario import DaoUsuario
 from src.dao.dao_veiculo import DaoVeiculo
 from src.dao.dao_destinos import DaoDestino
 
-from src.utils.simple_mail import send_mail_zepto
 
 from datetime import datetime
 
 #drop_tables()
 # create_tables()
-
-# Criação de veículo
-# session = create_session()
-# placa = 'BUI8713'
-# modelo = 'Strada'
-# cor = 'Branca'
-# odometro = '5000'
-# avariado = False
-
-# criar_veiculo = DaoVeiculo.criar_veiculo(session, placa, modelo, cor, odometro, avariado)
-# id = 2
-# deletar_veiculo = DaoVeiculo.deletar_veiculo(session, id)
-
-
-
-# obter_usuario = DaoUsuario.obter_usuario(session, 1)
-
-# print(obter_usuario.login)
-
-
-# CRIAÇÃO DE DESTINO
-
-# id = 2
-# destino = 'Somália'
-# id_formulario = 1
-
-# #criar_destino = DaoDestino.criar_destino(session, destino, id_formulario)
-
-# obter_destinos = DaoDestino.obter_destinos(session, id)
-
-# print(f"ID: {obter_destinos.id}, Destino: {obter_destinos.destino}, ID Formulário: {obter_destinos.id_formulario}")
-
-
-# id = 4
-# destino = 'Seychelles'
-# id_formulario = 3
-
-# criar_destino = DaoDestino.criar_destino(session, destino, id_formulario)
-
-# destinos = DaoDestino.obter_destinos_por_formulario(session, id_formulario)
-# # Exibição formatada
-# print(f'\nDestinos vinculados ao ID do formulário: {id_formulario}')
-# for d in destinos:
-#     print(f'- ID do Destino: {d.id} | Destino: {d.destino}')
-
-# FOR PARA FORMULARIOS COM MESMO ID
-
-# deletar_destinos = DaoDestino.deletar_destinos(session, id)
-
 
